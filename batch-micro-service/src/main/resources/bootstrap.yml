@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: batchs
+  cloud:
+    config:
+      uri: http://localhost:8888   
+      
+  batch:
+    job:
+      enabled: false      
+        
+        
