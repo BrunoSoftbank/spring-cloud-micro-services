@@ -8,8 +8,8 @@ spring:
         encrypt:
             enabled: false
         git:
-          uri: https://github.com/BrunoSoftbank/config-server
-          search-paths: laboratorios, exames, emails, usuarios, consultas, consulta_web_service, files, batchs, oauth2, relatorios, zull, eureka
+          uri: https://github.com/BrunoSoftbank/spring-cloud-micro-services
+          search-paths: spring-cloud-config-server/laboratorios, spring-cloud-config-server/exames, spring-cloud-config-server/emails, spring-cloud-config-server/usuarios, spring-cloud-config-server/consultas, spring-cloud-config-server/consulta_web_service, spring-cloud-config-server/files, spring-cloud-config-server/batchs, spring-cloud-config-server/oauth2, spring-cloud-config-server/relatorios, spring-cloud-config-server/zull, spring-cloud-config-server/eureka
 
 management:
   endpoints:

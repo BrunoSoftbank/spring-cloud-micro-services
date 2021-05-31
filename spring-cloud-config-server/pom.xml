@@ -9,8 +9,8 @@
 		<version>2.2.5.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.softbank.config.server</groupId>
-	<artifactId>config-server</artifactId>
+	<groupId>br.com.softbank.spring.cloud.config.server</groupId>
+	<artifactId>spring-cloud-config-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>config.server</name>
 	<description>Demo project for Spring Boot</description>
