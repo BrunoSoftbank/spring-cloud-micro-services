@@ -1,0 +1,41 @@
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka_user:eureka_pass@localhost:8761/eureka
+  instance:
+    instance-id:
+      ${spring.application.name}:${spring.application.instance_id:${random.value}}         
+info:
+  app:
+    name: emails  
+    description: Micro serviço responsável por disparo de emails, recebe as informações através da fila.
+logging:
+  file: target/logs.log 
+server:
+  port: ${PORT:0}
+ribbon:
+  eureka:
+    enabled: true       
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    exchenge:
+      emailExchenge:
+    routing-key:
+      emailRoutingKey: routing-key-email-welccome
+    dead-letter:
+      emailDeadLetter: dead-letter-email-welccome
+    parking-lot:
+      emailParkingLot: parking-lot-email-welccome 
+
+EMAIL_FROM: ${EMAIL}
+
+PASSWORD_EMAIL_FROM: ${PASSWORD_EMAIL}     
+
+LIMIT_RETRY: 5
+CRON_TAB_RETRY_DEAD_LETTER: 0 0/2 * * * ?

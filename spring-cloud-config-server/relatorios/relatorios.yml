@@ -1,0 +1,31 @@
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka_user:eureka_pass@localhost:8761/eureka
+  instance:
+    instance-id:
+      ${spring.application.name}:${spring.application.instance_id:${random.value}}   
+info:
+  app:
+    name: relatorios
+    description: Micro serviço responsável por gerar os relatórios, não acessa nenhuma base de dados para recuperar os registros, mas consome dos outros micro serviços.
+logging:
+  file: target/relatorios-logs.log
+server:
+  port: ${PORT:0}   
+ribbon:
+  eureka:
+    enabled: true            
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:8088/v1/oauth/usuario  
+
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest

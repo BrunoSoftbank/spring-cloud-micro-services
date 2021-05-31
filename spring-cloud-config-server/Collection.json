@@ -1,0 +1,29 @@
+{
+	"info": {
+		"_postman_id": "79b81ca2-7a18-47f5-a0ec-3c33cc99a4ab",
+		"name": "Spring Cloud Bus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8888/actuator/bus-refresh",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/actuator/bus-refresh",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"actuator",
+						"bus-refresh"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

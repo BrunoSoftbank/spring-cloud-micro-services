@@ -1,0 +1,18 @@
+server:
+  port: 8888
+  
+spring:
+  cloud:
+    config:
+      server:
+        encrypt:
+            enabled: false
+        git:
+          uri: https://github.com/BrunoSoftbank/config-server
+          search-paths: laboratorios, exames, emails, usuarios, consultas, consulta_web_service, files, batchs, oauth2, relatorios, zull, eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh       

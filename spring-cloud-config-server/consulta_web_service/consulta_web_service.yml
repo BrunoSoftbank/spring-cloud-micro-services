@@ -1,0 +1,33 @@
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka_user:eureka_pass@localhost:8761/eureka
+  instance:
+    instance-id:
+      ${spring.application.name}:${spring.application.instance_id:${random.value}}   
+info:
+  app:
+    name: consulta_web_service
+    description: Web Service SOAP responsável pelo crud de consultas.
+logging:
+  file: target/consulta_web_service-logs.log
+server:
+  port: 8080   
+
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    initialization-mode: always
+    password: 123456
+    url: jdbc:mysql://localhost:3306/softbank_consulta
+    username: root
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+          
+ 

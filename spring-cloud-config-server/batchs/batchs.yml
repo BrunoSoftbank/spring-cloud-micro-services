@@ -1,0 +1,40 @@
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka_user:eureka_pass@localhost:8761/eureka
+  instance:
+    instance-id:
+      ${spring.application.name}:${spring.application.instance_id:${random.value}}      
+info:
+  app:
+    name: laboratorio_batch  
+    description: Micro serviço responsável por ler arquivos do sftp e chamar o serviço rest para incluir novos laboratorios, linha a linha do arquivo xlsx.
+logging:
+  file: target/logs.log
+server:
+  port: ${PORT:0}
+ribbon:
+  eureka:
+    enabled: true   
+
+sftp_host: localhost
+sftp_port: 2222
+sftp_user: admin
+sftp_pass_word: admin123
+
+oauth2_client: softbank_client
+oauth2_secret: softbank_secret
+oauth2_url: http://localhost:8088/oauth/token
+oauth2_user_name: zeus.softbank@gmail.com
+oauth2_pass_word: zeus123
+
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+intervalInHours: 1

@@ -1,0 +1,67 @@
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka_user:eureka_pass@localhost:8761/eureka
+info:
+  app:
+    name: zull
+    description: Api Gateway da aplicação, onde centraliza todos os end points em um único endereço, além de realizar o load balance.
+logging:
+  file: target/logs.log
+server:  
+  port: 8765
+zuul:
+  prefix: /api
+  sensitive-headers:
+  - Cookie, Authorization  
+  routes:
+    usuarios:
+      path: /v1/usuarios/**
+      serviceId: usuarios
+      stripPrefix: true
+    laboratorios:
+      path: /v1/laboratorios/**
+      serviceId: laboratorios
+      stripPrefix: true
+    exames:
+      serviceId: exames
+      stripPrefix: true
+    relatorios:
+      path: /v1/relatorios/**
+      serviceId: relatorios
+      stripPrefix: true
+    oauth2:
+      path: /v1/oauth/**
+      serviceId: oauth2  
+      stripPrefix: false
+    consultas:
+      path: /v1/consultas/**
+      serviceId: consultas  
+      stripPrefix: false
+    files:
+      path: /v1/files/**
+      serviceId: files  
+      stripPrefix: false
+
+ribbon:
+  ReadTimeout: 60000
+  connection-timeout: 3000
+  eureka:
+    enabled: true
+
+hystrix:
+   command:
+      default:
+         execution:
+            iso lation:
+               thread:
+                  timeoutInMilliseconds: 30000
+
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
