@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head lang="pt-br">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+
+<style>
+body {
+	background: #BBBBBB;
+}
+
+h3 {
+	color: #00008B;
+	font-size: 26px;
+	font-weight: bold;
+	text-align: center;
+}
+
+span {
+	color: #00008B;
+	font-weight: bold;
+	text-align: center;
+}
+
+p {
+	text-align: center;
+}
+
+img {
+	position: relative;
+    width: 20%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.botao-enviar {
+	width: 100%;
+	padding: 15px 0;
+	background: #00008B;
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+	border: none;
+	border-radius: 5px;
+	transition: 1s;
+	cursor: pointer;
+	text-align: center;
+}
+
+.botao-enviar:hover {
+	background: #000000;
+	text-align: center;
+	text-align: center;
+}
+
+</style>
+</head>
+<body>
+
+
+	<div>
+		<h3 class="text-center" th:text="${'Olá SR° ' + name}"></h3>
+
+		<p>
+			Bem vindo a Softbank.
+		</p>
+
+		<p>
+			Você pode ativar seu cadastro agora mesmo clicando no botão abaixo.
+
+		</p>
+		
+		<a th:href="${token}"> <button class="botao-enviar" type="submit">Ativar Cadastro.</button> </a>
+		
+		<p>
+			OBS: Se o botão não funcionar, você pode copiar e colar o seguinte link no seu navegador: <h4 th:text="${token}"></h4>
+
+		<p>
+
+		<p>
+			<img
+				src="https://minionupucmg.files.wordpress.com/2017/03/logo-puc.jpg"
+				alt="Puc Minas" />
+		</p>
+	</div>
+</body>
+</html>

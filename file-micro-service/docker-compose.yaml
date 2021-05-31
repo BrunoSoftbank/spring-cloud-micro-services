@@ -1,0 +1,70 @@
+version: '3.5'
+
+services:
+  mysql:
+    image: mysql
+    container_name: mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - mysql:/var/lib/mysql
+    security_opt:
+      - seccomp:unconfined
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+      image: rabbitmq:3-management-alpine
+      container_name: rabbitmq
+      environment:
+          RABBITMQ_DEFAULT_USER: guest
+          RABBITMQ_DEFAULT_PASS: guest
+      ports:
+          - 5672:5672
+          - 15672:15672  
+
+  sonarqube:
+    image: sonarqube
+    container_name: sonarqube
+    expose:
+      - 9000
+    ports:
+      - "127.0.0.1:9000:9000"
+    networks:
+      - sonarnet
+    environment:
+      - sonar.jdbc:mysql://localhost:3306/sonar
+      - sonar.jdbc.username=root
+      - sonar.jdbc.password=123456
+    volumes:
+      - sonarqube_conf:/opt/sonarqube/conf
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+
+  sftp:
+    image: atmoz/sftp
+    container_name: sftp
+    ports:
+        - "2222:22"
+    command: admin:admin123:::upload
+
+networks:
+  sonarnet:
+
+volumes:
+  sonarqube_conf:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_bundled-plugins:
+  mysql:
+
+ 
+

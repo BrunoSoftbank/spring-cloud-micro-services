@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+        targetNamespace="http://softbank.com.br" 
+        xmlns:tns="http://softbank.com.br" 
+        elementFormDefault="qualified">
+        
+    <xs:element name="SalvarConsultaRequest">
+     	<xs:complexType>
+     		<xs:sequence>
+     			<xs:element name="consultaRequest" type="tns:ConsultaRequest"/>
+     		</xs:sequence>
+     	</xs:complexType>
+     </xs:element> 
+     
+     <xs:element name="SalvarConsultaResponse">
+     	<xs:complexType>
+     		<xs:sequence>
+     			<xs:element name="consultaResponse" type="tns:ConsultaResponse"/>
+     		</xs:sequence>
+     	</xs:complexType>
+     </xs:element>
+     
+     <xs:element name="FindConsultaByIdRequest">
+     	<xs:complexType>
+     		<xs:sequence>
+     			<xs:element name="id" type="xs:int"/>
+     		</xs:sequence>
+     	</xs:complexType>
+     </xs:element>    
+     
+     <xs:element name="FindConsultaByIdResponse">
+     	<xs:complexType>
+     		<xs:sequence>
+     			<xs:element name="consultaResponse" type="tns:ConsultaResponse"/>
+     		</xs:sequence>
+     	</xs:complexType>
+     </xs:element> 
+     
+      <xs:element name="FindConsultaByFiltersRequest">
+     	<xs:complexType>
+     		<xs:sequence>
+     			<xs:element name="consultaRequest" type="tns:ConsultaRequest"/>
+     		</xs:sequence>
+     	</xs:complexType>
+     </xs:element>    
+     
+     <xs:element name="FindConsultaByFiltersResponse">
+     	<xs:complexType>
+     		<xs:sequence>
+     			<xs:element name="consultaResponse" type="tns:ConsultaResponse"/>
+     		</xs:sequence>
+     	</xs:complexType>
+     </xs:element> 
+     
+      <xs:element name="FindAllConsultaRequest">
+     	<xs:complexType>
+     	</xs:complexType>
+     </xs:element>
+     
+     <xs:element name="FindAllConsultaResponse">
+     	<xs:complexType>
+     		<xs:sequence>
+     			<xs:element name="consultaResponse" type="tns:ConsultaResponse" maxOccurs="unbounded"/>
+     		</xs:sequence>
+     	</xs:complexType>
+     </xs:element> 
+
+      <xs:element name="DeleteConsultaRequest">
+     	<xs:complexType>
+     		<xs:sequence>
+     			<xs:element name="id" type="xs:int"/>
+     		</xs:sequence>
+     	</xs:complexType>
+     </xs:element>
+     
+     <xs:element name="DeleteConsultaResponse">
+     	<xs:complexType>
+     		<xs:sequence>
+     			<xs:element name="status" type="tns:Status"/>
+     		</xs:sequence>
+     	</xs:complexType>
+     </xs:element>
+           
+     <xs:simpleType name="Status">
+     	 <xs:restriction base="xs:string">
+     	 		<xs:enumeration value="SUCCESS"/>
+     	 		<xs:enumeration value="FAILURE"/>
+     	 </xs:restriction>
+     </xs:simpleType>
+     
+     <xs:complexType name="ConsultaRequest">
+     	 <xs:sequence>
+     	 		<xs:element name="usuarioId" type="xs:int" />
+     	 		<xs:element name="exameId" type="xs:int" />
+     	 		<xs:element name="laboratorioId" type="xs:int" />
+     	 </xs:sequence>
+     </xs:complexType>
+     
+     <xs:complexType name="ConsultaResponse">
+     	 <xs:sequence>
+     	       <xs:element name="id" type="xs:int" />
+     	 		<xs:element name="usuarioId" type="xs:int" />
+     	 		<xs:element name="exameId" type="xs:int" />
+     	 		<xs:element name="laboratorioId" type="xs:int" />
+     	 </xs:sequence>
+     </xs:complexType>
+</xs:schema>

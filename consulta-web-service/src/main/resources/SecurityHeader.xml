@@ -1,0 +1,10 @@
+   <soapenv:Header>
+	<wsse:Security
+		xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+		mustUnderstand="1">
+		<wsse:UsernameToken>
+			<wsse:Username>UsuarioAdmin</wsse:Username>
+			<wsse:Password>admin123</wsse:Password>
+		</wsse:UsernameToken>
+	</wsse:Security>
+   </soapenv:Header>
