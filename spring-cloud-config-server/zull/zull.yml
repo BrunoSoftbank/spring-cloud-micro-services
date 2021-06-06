@@ -44,6 +44,11 @@ zuul:
       path: /v1/files/**
       serviceId: files  
       stripPrefix: false
+    config-server:
+      path: /**
+      serviceId: config-server  
+      stripPrefix: false
+
 
 ribbon:
   ReadTimeout: 60000
