@@ -16,6 +16,13 @@ import javax.persistence.ManyToMany;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Usuario implements UserDetails, Serializable {
 
@@ -31,22 +38,6 @@ public class Usuario implements UserDetails, Serializable {
 	@ManyToMany(fetch= FetchType.EAGER)
 	private List<Role> roles = new ArrayList<Role>();
 	private LocalDate dataCadastro;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public LocalDate getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(LocalDate dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -81,38 +72,5 @@ public class Usuario implements UserDetails, Serializable {
 	@Override
 	public boolean isEnabled() {
 		return isAtivo;
-	}
-	
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public Boolean getIsAtivo() {
-		return isAtivo;
-	}
-
-	public void setIsAtivo(Boolean isAtivo) {
-		this.isAtivo = isAtivo;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 }

@@ -9,6 +9,13 @@ import javax.persistence.Id;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Role implements GrantedAuthority, Serializable {
 
@@ -19,20 +26,8 @@ public class Role implements GrantedAuthority, Serializable {
 	private Long id;
 	private String nome;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	@Override
 	public String getAuthority() {
 		return nome;
-	}
-	
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 }

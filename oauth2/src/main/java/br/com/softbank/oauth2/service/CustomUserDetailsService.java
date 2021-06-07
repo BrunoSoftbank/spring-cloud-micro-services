@@ -26,11 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(email);
-		if(!usuarioOptional.isPresent()) {
-			throw new InvalidGrantException(ErrosDefaultEnum.USUARIO_JA_NAO_AUTORIZADO.getDescricao());			
-		} 
-		return usuarioOptional.get();
+		return usuarioRepository.findByEmail(email).orElseThrow(() ->  new InvalidGrantException(ErrosDefaultEnum.USUARIO_NAO_AUTORIZADO.getDescricao()));		
 	}
 	
 	public void createUserAdminIfNotExists() {
