@@ -14,8 +14,8 @@ import br.com.softbank.batch.job.LaboratorioScheduleJob;
 @Configuration
 public class QuartzConfig {
 
-	@Value("${intervalInHours}")
-	private Integer intervalInHours;
+	@Value("${intervalInMinutes}")
+	private Integer intervalInMinutes;
 
 	@Bean
 	public JobDetail quartzJobDetail() {
@@ -27,7 +27,7 @@ public class QuartzConfig {
 	public Trigger jobTrigger() {
 		SimpleScheduleBuilder schedBuilder = SimpleScheduleBuilder
 				.simpleSchedule()
-				.withIntervalInHours(intervalInHours)
+				.withIntervalInMinutes(intervalInMinutes)
 				.repeatForever();
 		return TriggerBuilder.newTrigger().forJob(quartzJobDetail())
 				.withSchedule(schedBuilder)	

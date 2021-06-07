@@ -37,4 +37,4 @@ spring:
     username: guest
     password: guest
 
-intervalInHours: 1
+intervalInMinutes: 10
