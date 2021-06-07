@@ -57,9 +57,9 @@ public class ExameController {
 		return ResponseEntity.ok(exameService.update(request.convertToEntity()));
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	@ApiOperation(value = "Deleção de exames")
-	public ResponseEntity<Void> deleteById(@RequestHeader String  Authorization, Long id) {
+	public ResponseEntity<Void> deleteById(@RequestHeader String  Authorization, @PathVariable Long id) {
 		exameService.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}

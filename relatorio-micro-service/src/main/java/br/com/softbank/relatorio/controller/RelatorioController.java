@@ -24,8 +24,8 @@ public class RelatorioController {
 	private RelatorioService relatorioService;
 
 	@GetMapping
-	@ApiOperation(value = "Relatório PDF, XLSX ou TXT do recurso selecionado")
-	public void teste(@RequestHeader String  Authorization, @RequestParam ResourceEnum resource, @RequestParam TipoRelatorioEnum tipoRelatorio,  HttpServletResponse response) throws Exception {
+	@ApiOperation(value = "Relatório PDF, XLSX, WORD ou TXT do recurso selecionado")
+	public void download(@RequestHeader String  Authorization, @RequestParam ResourceEnum resource, @RequestParam TipoRelatorioEnum tipoRelatorio,  HttpServletResponse response) throws Exception {
 		relatorioService.gerarRelatorio(Authorization, resource, tipoRelatorio, response);
 		response.getOutputStream().close();
 	}

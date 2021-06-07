@@ -1,0 +1,20 @@
+server:
+  port: 8888
+  
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        encrypt:
+            enabled: false
+        git:
+          uri: https://github.com/BrunoSoftbank/spring-cloud-micro-services
+          search-paths: config-server/laboratorios, config-server/exames, config-server/emails, config-server/usuarios, config-server/consultas, config-server/consulta_web_service, config-server/files, config-server/batchs, config-server/oauth2, config-server/relatorios, config-server/zull, config-server/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh       

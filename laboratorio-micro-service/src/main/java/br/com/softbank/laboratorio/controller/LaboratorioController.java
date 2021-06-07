@@ -59,9 +59,9 @@ public class LaboratorioController {
 		return ResponseEntity.ok(laboratorioService.update(request.convertToEntity()));
 	}
 
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	@ApiOperation(value = "Deleção lógica de laboratórios")
-	public ResponseEntity<Void> deleteById(@RequestHeader String Authorization, Long id) {
+	public ResponseEntity<Void> deleteById(@RequestHeader String Authorization, @PathVariable Long id) {
 		laboratorioService.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}

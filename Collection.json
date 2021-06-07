@@ -1,0 +1,1219 @@
+{
+	"info": {
+		"_postman_id": "c4218784-e32d-4a45-975c-0048e60437ed",
+		"name": "Sprinc Cloud Micro Services",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authorization",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "softbank_secret",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "softbank_client",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "scope",
+							"value": "web",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "bruno.softbank@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "bruno123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8765/api/oauth2/oauth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"oauth2",
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Spring Cloud Bus",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/actuator/bus-refresh",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"actuator",
+						"bus-refresh"
+					]
+				},
+				"description": "Update all application.yml without a git hub commit."
+			},
+			"response": []
+		},
+		{
+			"name": "Config Server - Eureka",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/eureka/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"eureka",
+						"default"
+					]
+				},
+				"description": "Load eureka properties from Config Server."
+			},
+			"response": []
+		},
+		{
+			"name": "Config Server - Zull",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/zull/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"zull",
+						"default"
+					]
+				},
+				"description": "Load zull properties from Config Server."
+			},
+			"response": []
+		},
+		{
+			"name": "Config Server - Oauth2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/oauth2/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"oauth2",
+						"default"
+					]
+				},
+				"description": "Load oauth2 properties from Config Server."
+			},
+			"response": []
+		},
+		{
+			"name": "Config Server - Usuarios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/usuarios/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"usuarios",
+						"default"
+					]
+				},
+				"description": "Load eureka properties from Config Server."
+			},
+			"response": []
+		},
+		{
+			"name": "Config Server - Emails",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/emails/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"emails",
+						"default"
+					]
+				},
+				"description": "Load eureka properties from Config Server."
+			},
+			"response": []
+		},
+		{
+			"name": "Config Server - Exames",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/exames/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"exames",
+						"default"
+					]
+				},
+				"description": "Load exames properties from Config Server."
+			},
+			"response": []
+		},
+		{
+			"name": "Config Server - Laboratorios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/laboratorios/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"laboratorios",
+						"default"
+					]
+				},
+				"description": "Load laboratorios properties from Config Server."
+			},
+			"response": []
+		},
+		{
+			"name": "Config Server - Relatorios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/relatorios/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"relatorios",
+						"default"
+					]
+				},
+				"description": "Load relatorios properties from Config Server."
+			},
+			"response": []
+		},
+		{
+			"name": "Config Server - Batchs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/batchs/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"batchs",
+						"default"
+					]
+				},
+				"description": "Load batchs properties from Config Server."
+			},
+			"response": []
+		},
+		{
+			"name": "Config Server - Files",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/files/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"files",
+						"default"
+					]
+				},
+				"description": "Load files properties from Config Server."
+			},
+			"response": []
+		},
+		{
+			"name": "Config Server - Consultas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/consultas/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"consultas",
+						"default"
+					]
+				},
+				"description": "Load consultas properties from Config Server."
+			},
+			"response": []
+		},
+		{
+			"name": "Config Server - Consulta Web Service",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/consulta_web_service/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"consulta_web_service",
+						"default"
+					]
+				},
+				"description": "Load consulta web service properties from Config Server."
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"bruno.softbank@gmail.com\",\n  \"nome\": \"Bruno\",\n  \"senha\": \"bruno123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8765/api/usuarios/v1/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"usuarios",
+						"v1",
+						"usuarios"
+					]
+				},
+				"description": "Create a new user"
+			},
+			"response": []
+		},
+		{
+			"name": "Active user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/usuarios/v1/usuarios/$2a$10$a1hD0077.HKdhG3cyTgkAOOATseUHqECVkdbckTHzYy1ADWzRlvu",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"usuarios",
+						"v1",
+						"usuarios",
+						"$2a$10$a1hD0077.HKdhG3cyTgkAOOATseUHqECVkdbckTHzYy1ADWzRlvu"
+					]
+				},
+				"description": "Active user by token ( The token is send per email when a new user is created )"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Claims",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "b61d2c98-a170-4b34-8de2-d026b2083302",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/oauth2/v1/oauth/usuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"oauth2",
+						"v1",
+						"oauth",
+						"usuario"
+					]
+				},
+				"description": "Get authenticated user claims"
+			},
+			"response": []
+		},
+		{
+			"name": "Find User By id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/usuarios/v1/usuarios/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"usuarios",
+						"v1",
+						"usuarios",
+						"5"
+					]
+				},
+				"description": "Find User By id"
+			},
+			"response": []
+		},
+		{
+			"name": "Find All Users paged",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/usuarios/v1/usuarios?limit=10&page=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"usuarios",
+						"v1",
+						"usuarios"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						}
+					]
+				},
+				"description": "Find All Users paged"
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new Exam",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Exame de Coração\",\n  \"tipo\": {\n    \"id\": 1\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8765/api/exames/v1/exames",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"exames",
+						"v1",
+						"exames"
+					]
+				},
+				"description": "Create a new Exam"
+			},
+			"response": []
+		},
+		{
+			"name": "Update a exam",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 1,\n  \"nome\": \"Exame de covid\",\n  \"tipo\": {\n    \"id\": 1\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8765/api/exames/v1/exames",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"exames",
+						"v1",
+						"exames"
+					]
+				},
+				"description": "Update a exam"
+			},
+			"response": []
+		},
+		{
+			"name": "Update a exam status",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/exames/v1/exames/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"exames",
+						"v1",
+						"exames",
+						"2"
+					]
+				},
+				"description": "Update a exam status"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a exam",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/exames/v1/exames/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"exames",
+						"v1",
+						"exames",
+						"1"
+					]
+				},
+				"description": "Delete a exam"
+			},
+			"response": []
+		},
+		{
+			"name": "Find All Exams",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/exames/v1/exames",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"exames",
+						"v1",
+						"exames"
+					]
+				},
+				"description": "Find All Exams"
+			},
+			"response": []
+		},
+		{
+			"name": "Find a exam by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/exames/v1/exames/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"exames",
+						"v1",
+						"exames",
+						"2"
+					]
+				},
+				"description": "Find a exam by id"
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new laboratory",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"endereco\": {\n    \"bairro\": \"Grajau\",\n    \"cidade\": \"São Paulo\",\n    \"numero\": \"345\",\n    \"rua\": \"Belmira Marin\"\n  },\n  \"nome\": \"Unidade Grajau\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8765/api/laboratorios/v1/laboratorios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"laboratorios",
+						"v1",
+						"laboratorios"
+					]
+				},
+				"description": "Create a new laboratory"
+			},
+			"response": []
+		},
+		{
+			"name": "Update a Laboratory",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 3,\n    \"nome\": \"Unidade Grajau 2\",\n    \"endereco\": {\n        \"cidade\": \"São Paulo\",\n        \"bairro\": \"Grajau\",\n        \"rua\": \"Belmira Marim\",\n        \"numero\": \"345\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8765/api/laboratorios/v1/laboratorios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"laboratorios",
+						"v1",
+						"laboratorios"
+					]
+				},
+				"description": "Update a Laboratory"
+			},
+			"response": []
+		},
+		{
+			"name": "Update a laboratory Status",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/laboratorios/v1/laboratorios/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"laboratorios",
+						"v1",
+						"laboratorios",
+						"1"
+					]
+				},
+				"description": "Update a laboratory Status"
+			},
+			"response": []
+		},
+		{
+			"name": "Find all laboratories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/laboratorios/v1/laboratorios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"laboratorios",
+						"v1",
+						"laboratorios"
+					]
+				},
+				"description": "Find all laboratories"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a laboratory",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/laboratorios/v1/laboratorios/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"laboratorios",
+						"v1",
+						"laboratorios",
+						"2"
+					]
+				},
+				"description": "Delete a laboratory"
+			},
+			"response": []
+		},
+		{
+			"name": "Find a laboratory by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/laboratorios/v1/laboratorios/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"laboratorios",
+						"v1",
+						"laboratorios",
+						"3"
+					]
+				},
+				"description": "Find a laboratory by id"
+			},
+			"response": []
+		},
+		{
+			"name": "Create an Appointment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"exame_id\": 3,\n  \"laboratorio_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8765/api/consultas/v1/consultas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"consultas",
+						"v1",
+						"consultas"
+					]
+				},
+				"description": "Create a Appointment"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an Appointment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/consultas/v1/consultas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"consultas",
+						"v1",
+						"consultas",
+						"1"
+					]
+				},
+				"description": "Delete an Appointment"
+			},
+			"response": []
+		},
+		{
+			"name": "Find all Appointments",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/consultas/v1/consultas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"consultas",
+						"v1",
+						"consultas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find an Appointment by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/consultas/v1/consultas/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"consultas",
+						"v1",
+						"consultas",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Download a xlsx laboratory file model",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/files/v1/files?resource=laboratorios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"files",
+						"v1",
+						"files"
+					],
+					"query": [
+						{
+							"key": "resource",
+							"value": "laboratorios"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload a laboratory xlsx file",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/bruno/Downloads/Laboratórios.xlsx"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8765/api/files/v1/files?resource=laboratorios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"files",
+						"v1",
+						"files"
+					],
+					"query": [
+						{
+							"key": "resource",
+							"value": "laboratorios"
+						}
+					]
+				},
+				"description": "Upload a laboratory xlsx file"
+			},
+			"response": []
+		},
+		{
+			"name": "Download a report by resource and type",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/relatorios/v1/relatorios?resource=exames&tipoRelatorio=pdf",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"relatorios",
+						"v1",
+						"relatorios"
+					],
+					"query": [
+						{
+							"key": "resource",
+							"value": "exames"
+						},
+						{
+							"key": "tipoRelatorio",
+							"value": "pdf"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
