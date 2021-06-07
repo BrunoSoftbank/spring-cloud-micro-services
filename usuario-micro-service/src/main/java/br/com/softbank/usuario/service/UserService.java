@@ -12,8 +12,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.com.softbank.usuario.converter.UsuarioConverter;
 import br.com.softbank.usuario.dto.UsuarioEmailDTO;
-import br.com.softbank.usuario.dto.UsuarioResponseDTO;
 import br.com.softbank.usuario.enuns.ErrosDefaultEnum;
 import br.com.softbank.usuario.exception.UsuarioAlreadyExistsException;
 import br.com.softbank.usuario.exception.UsuarioNotFoundException;
@@ -23,6 +23,7 @@ import br.com.softbank.usuario.model.Role;
 import br.com.softbank.usuario.model.Token;
 import br.com.softbank.usuario.model.Usuario;
 import br.com.softbank.usuario.repository.UsuarioRepository;
+import br.com.softbank.usuario.response.UsuarioResponse;
 
 @Service
 public class UserService {
@@ -37,20 +38,21 @@ public class UserService {
 	private RabbitEmailProducerIntegration emailProducer;
 	@Autowired
 	private Oauth2Integration oauth2Integration;
+	@Autowired
+	private UsuarioConverter usuarioConverter;
 	
-	public List<UsuarioResponseDTO> findAll(String Authorization, int page, int limit) {
-		UsuarioResponseDTO authenticatedUser = getAuthenticatedUser(Authorization);
+	public List<UsuarioResponse> findAll(String Authorization, int page, int limit) {
+		UsuarioResponse authenticatedUser = getAuthenticatedUser(Authorization);
 		List<Usuario> usuarios = userRepository.findAll(PageRequest.of(page, limit > 0 ? limit : 6, Sort.Direction.ASC, "nome")).getContent();
 		
 		if(authenticatedUser.getPerfil().equalsIgnoreCase("ROLE_USER")) {
 			usuarios = usuarios.stream().filter(u -> u.getEmail().equalsIgnoreCase(authenticatedUser.getEmail())).collect(Collectors.toList());
 		} 
 		
-		return usuarios.stream().map(u -> new UsuarioResponseDTO(u.getId(), u.getNome(), u.getEmail(), u.getIsAtivo(),
-								u.getRoles().get(0).getNome(), u.getDataCadastro())).collect(Collectors.toList());
+		return usuarios.stream().map(u -> usuarioConverter.convertUsuarioToUsuarioResponse(u)).collect(Collectors.toList());
 	}
 
-	public UsuarioResponseDTO save(Usuario usuario) {
+	public UsuarioResponse save(Usuario usuario) {
 		LOG.warn(this.getClass().getSimpleName() + ".save(Usuario usuario) " + usuario);
 		
 		Optional<Usuario> usuarioOptional = this.userRepository.findByEmail(usuario.getEmail());
@@ -64,7 +66,7 @@ public class UserService {
 		usuario = userRepository.save(usuario);
 
 		emailProducer.sendToQueue(new UsuarioEmailDTO(usuario.getNome(), usuario.getEmail(), tokenService.save(usuario).getValor()));
-		return new UsuarioResponseDTO().fromEntity(usuario);
+		return usuarioConverter.convertUsuarioToUsuarioResponse(usuario);
 	}
 
 	public void update(String valorToken) {
@@ -81,20 +83,19 @@ public class UserService {
 		userRepository.save(user);
 	}
 	
-	public UsuarioResponseDTO getAuthenticatedUser(String Authorization) {
+	public UsuarioResponse getAuthenticatedUser(String Authorization) {
 		return oauth2Integration.getAuthenticatedUser(Authorization);
 	}
 
-	public UsuarioResponseDTO findById(String Authorization, Long id) {
-		UsuarioResponseDTO authenticatedUser = this.getAuthenticatedUser(Authorization);
+	public UsuarioResponse findById(String Authorization, Long id) {
+		UsuarioResponse authenticatedUser = this.getAuthenticatedUser(Authorization);
 		Optional<Usuario> userOptional = userRepository.findById(id);
 		
 		if(userOptional.isPresent()) {
-			Usuario usuario = userOptional.get();
-			if(authenticatedUser.getPerfil().equalsIgnoreCase("ROLE_USER") && authenticatedUser.getId() != usuario.getId()) {
+			if(authenticatedUser.getPerfil().equalsIgnoreCase("ROLE_USER") && authenticatedUser.getId() != userOptional.get().getId()) {
 				throw new UsuarioNotFoundException(String.format(ErrosDefaultEnum.USUARIO_NAO_ENCONTRADO.getDescricao(), id));
 			}
-			return new UsuarioResponseDTO().fromEntity(usuario);
+			return usuarioConverter.convertUsuarioToUsuarioResponse(userOptional.get());
 		}
 		throw new UsuarioNotFoundException(String.format(ErrosDefaultEnum.USUARIO_NAO_ENCONTRADO.getDescricao(), id));
 	}

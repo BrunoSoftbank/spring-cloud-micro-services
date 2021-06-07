@@ -6,6 +6,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Token {
 
@@ -16,31 +23,9 @@ public class Token {
 	@OneToOne
 	private Usuario usuario;
 	
-	public Token() {
-		
-	}
-	
 	public Token(String valor, Usuario usuario) {
 		this.valor = valor;
 		this.usuario = usuario;
 	}
-
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getValor() {
-		return valor;
-	}
-	public void setValor(String valor) {
-		this.valor = valor;
-	}
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+	
 }

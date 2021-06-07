@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.softbank.usuario.converter.UsuarioConverter;
 import br.com.softbank.usuario.dto.UsuarioDTO;
-import br.com.softbank.usuario.dto.UsuarioResponseDTO;
+import br.com.softbank.usuario.response.UsuarioResponse;
 import br.com.softbank.usuario.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,11 +31,13 @@ public class UsuarioController {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UsuarioConverter usuarioConverter;
 
 	@PostMapping
 	@ApiOperation(value = "Cadastro de usuários")
-	public ResponseEntity<UsuarioResponseDTO> save(@Valid @RequestBody UsuarioDTO request) {
-		return new ResponseEntity<UsuarioResponseDTO>(userService.save(request.convertToEntity()), HttpStatus.CREATED);
+	public ResponseEntity<UsuarioResponse> save(@Valid @RequestBody UsuarioDTO request) {
+		return new ResponseEntity<UsuarioResponse>(userService.save(usuarioConverter.convertUsuarioDTOToEntity(request)), HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/{token}")
@@ -45,14 +48,14 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<UsuarioResponseDTO> findById(@RequestHeader String Authorization, @PathVariable Long id) {
+	public ResponseEntity<UsuarioResponse> findById(@RequestHeader String Authorization, @PathVariable Long id) {
 		return ResponseEntity.ok(userService.findById(Authorization, id));
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<UsuarioResponseDTO>> findAll(@RequestHeader String Authorization,
+	public ResponseEntity<List<UsuarioResponse>> findAll(@RequestHeader String Authorization,
 			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
 			@RequestParam(name = "limit", required = false, defaultValue = "6") int limit) {
-		return new ResponseEntity<List<UsuarioResponseDTO>>(userService.findAll(Authorization, page, limit), HttpStatus.OK);
+		return new ResponseEntity<List<UsuarioResponse>>(userService.findAll(Authorization, page, limit), HttpStatus.OK);
 	}
 }

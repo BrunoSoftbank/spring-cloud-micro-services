@@ -26,26 +26,20 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(TokenInvalidException.class)
 	public ResponseEntity<ResponseDTO> tokenInvalidException(TokenInvalidException ex, HttpServletRequest request) {	
-		LOG.error(this.getClass().getSimpleName() + ".tokenInvalidException(TokenInvalidException ex, HttpServletRequest request) " + ex.getMessage());
-		
-		ResponseDTO response = new ResponseDTO(HttpStatus.NOT_FOUND, ex.getMessage());
-		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+		LOG.error(this.getClass().getSimpleName() + ".tokenInvalidException(TokenInvalidException ex, HttpServletRequest request) " + ex.getMessage());		
+		return new ResponseEntity<>(new ResponseDTO(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
 	}	
 	
 	@ExceptionHandler(UsuarioNotFoundException.class)
 	public ResponseEntity<ResponseDTO> tokenInvalidException(UsuarioNotFoundException ex, HttpServletRequest request) {	
 		LOG.error(this.getClass().getSimpleName() + ".usuarioNotFoundException(UsuarioNotFoundException ex, HttpServletRequest request) " + ex.getMessage());
-		
-		ResponseDTO response = new ResponseDTO(HttpStatus.NOT_FOUND, ex.getMessage());
-		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(new ResponseDTO(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
 	}	
 	
 	@ExceptionHandler(UsuarioAlreadyExistsException.class)
 	public ResponseEntity<ResponseDTO> usuarioAlreadyExistsException(UsuarioAlreadyExistsException ex, HttpServletRequest request) {	
-		LOG.error(this.getClass().getSimpleName() + ".usuarioAlreadyExistsException(UsuarioAlreadyExistsException ex, HttpServletRequest request) " + ex.getMessage());
-		
-		ResponseDTO response = new ResponseDTO(HttpStatus.BAD_REQUEST, ex.getMessage());
-		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+		LOG.error(this.getClass().getSimpleName() + ".usuarioAlreadyExistsException(UsuarioAlreadyExistsException ex, HttpServletRequest request) " + ex.getMessage());		
+		return new ResponseEntity<>(new ResponseDTO(HttpStatus.BAD_REQUEST, ex.getMessage()), HttpStatus.BAD_REQUEST);
 	}
 
 	@Override
@@ -56,7 +50,6 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
         		.stream().map(error -> new ErrorDTO(error.getDefaultMessage()))
                 .collect(Collectors.toList());
         
-        ResponseDTO response = new ResponseDTO(HttpStatus.BAD_REQUEST, "Invalid fields", errors);
-        return new ResponseEntity<>(response, status);
+        return new ResponseEntity<>(new ResponseDTO(HttpStatus.BAD_REQUEST, "Invalid fields", errors), status);
 	}
 }
