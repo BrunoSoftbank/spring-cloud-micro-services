@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import br.com.softbank.relatorio.annotations.RelatorioLabel;
 
 @RelatorioLabel(name = "Usuários", order = 0)
-public class UsuarioDTO implements Serializable {
+public class RelatorioUsuarioDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import br.com.softbank.file.dto.ResponseDTO;
+import br.com.softbank.file.response.ResponseDTO;
 
 
 @RestControllerAdvice
@@ -21,24 +21,18 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(MediaTypeNotSupportedException.class)
 	public ResponseEntity<ResponseDTO> mediaTypeNotSupportedException(MediaTypeNotSupportedException ex, HttpServletRequest request) {	
 		LOG.error(this.getClass().getSimpleName() + ".mediaTypeNotSupportedException(MediaTypeNotSupportedException ex, HttpServletRequest request) " + ex.getMessage());
-		ResponseDTO response = new ResponseDTO(HttpStatus.UNSUPPORTED_MEDIA_TYPE, ex.getMessage());
-		LOG.error(ex.getMessage());
-		return new ResponseEntity<>(response, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+		return new ResponseEntity<>(new ResponseDTO(ex.getMessage()), HttpStatus.UNSUPPORTED_MEDIA_TYPE);
 	}
 	
 	@ExceptionHandler(HeaderNotFoundException.class)
 	public ResponseEntity<ResponseDTO> headerNotFoundException(HeaderNotFoundException ex, HttpServletRequest request) {	
 		LOG.error(this.getClass().getSimpleName() + ".headerNotFoundException(HeaderNotFoundException ex, HttpServletRequest request) " + ex.getMessage());
-		ResponseDTO response = new ResponseDTO(HttpStatus.UNSUPPORTED_MEDIA_TYPE, ex.getMessage());
-		LOG.error(ex.getMessage());
-		return new ResponseEntity<>(response, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+		return new ResponseEntity<>(new ResponseDTO(ex.getMessage()), HttpStatus.UNSUPPORTED_MEDIA_TYPE);
 	}
 	
 	@ExceptionHandler(InvalidFieldException.class)
 	public ResponseEntity<ResponseDTO> invalidFieldException(InvalidFieldException ex, HttpServletRequest request) {	
 		LOG.error(this.getClass().getSimpleName() + ".invalidFieldException(InvalidFieldException ex, HttpServletRequest request) " + ex.getMessage());
-		ResponseDTO response = new ResponseDTO(HttpStatus.UNSUPPORTED_MEDIA_TYPE, ex.getMessage());
-		LOG.error(ex.getMessage());
-		return new ResponseEntity<>(response, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+		return new ResponseEntity<>(new ResponseDTO(ex.getMessage()), HttpStatus.UNSUPPORTED_MEDIA_TYPE);
 	}
 }

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import br.com.softbank.batch.dto.LaboratorioFromFileDTO;
-import br.com.softbank.batch.dto.LaboratorioRequestDTO;
+import br.com.softbank.batch.request.LaboratorioRequest;
 
 @Configuration
 public class SalvarLaboratorioStepConfig {
@@ -21,12 +21,12 @@ public class SalvarLaboratorioStepConfig {
 	@Bean
 	public Step salvarLaboratorioStep(
 			ItemReader<LaboratorioFromFileDTO> laboratorioReader,
-			ItemProcessor<LaboratorioFromFileDTO, LaboratorioRequestDTO> laboratorioProcessor,
-			ItemWriter<LaboratorioRequestDTO> laboratorioWriter) {
+			ItemProcessor<LaboratorioFromFileDTO, LaboratorioRequest> laboratorioProcessor,
+			ItemWriter<LaboratorioRequest> laboratorioWriter) {
 		
 		return stepBuilderFactory
 				.get("salvarLaboratorioStep")			
-				.<LaboratorioFromFileDTO, LaboratorioRequestDTO>chunk(1000000)
+				.<LaboratorioFromFileDTO, LaboratorioRequest>chunk(1000000)
 				.reader(laboratorioReader)
 				.processor(laboratorioProcessor)
 				.writer(laboratorioWriter)

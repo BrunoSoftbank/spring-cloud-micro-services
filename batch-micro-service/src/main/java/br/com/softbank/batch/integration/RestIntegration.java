@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
 import org.springframework.stereotype.Component;
 
-import br.com.softbank.batch.dto.LaboratorioRequestDTO;
+import br.com.softbank.batch.request.LaboratorioRequest;
 
 @Component
 public class RestIntegration {
@@ -22,7 +22,7 @@ public class RestIntegration {
 		return "Bearer ".concat(oAuth2RestOperations.getAccessToken().getValue());
 	}
 
-	public void salvar(LaboratorioRequestDTO request) {
+	public void salvar(LaboratorioRequest request) {
 		if (request != null) {
 			try {
 				String Authorization = this.getAccessToken();

@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import br.com.softbank.relatorio.dto.ErrorDTO;
-import br.com.softbank.relatorio.dto.ResponseDTO;
+import br.com.softbank.relatorio.response.ErrorDefault;
+import br.com.softbank.relatorio.response.ResponseDefault;
 
 @RestControllerAdvice
 public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
@@ -25,30 +25,25 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
 	private static final Logger LOG = LoggerFactory.getLogger(ExceptionHandlerAdvice.class);
 
 	@ExceptionHandler(TipoRelatorioNotFoundException.class)
-	public ResponseEntity<ResponseDTO> tipoRelatorioNotFound(TipoRelatorioNotFoundException ex, HttpServletRequest request) {	
+	public ResponseEntity<ResponseDefault> tipoRelatorioNotFound(TipoRelatorioNotFoundException ex, HttpServletRequest request) {	
 		LOG.error(this.getClass().getSimpleName() + ".tipoRelatorioNotFound(TipoRelatorioNotFoundException ex, HttpServletRequest request) " + ex.getMessage());
-		ResponseDTO response = new ResponseDTO(HttpStatus.NOT_FOUND, ex.getMessage());
-		LOG.error(ex.getMessage());
-		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(new ResponseDefault(ex.getMessage()), HttpStatus.NOT_FOUND);
 	}
 	
 	@ExceptionHandler(RecursoNotFoundException.class)
-	public ResponseEntity<ResponseDTO> tipoRecursoNotFound(RecursoNotFoundException ex, HttpServletRequest request) {	
+	public ResponseEntity<ResponseDefault> tipoRecursoNotFound(RecursoNotFoundException ex, HttpServletRequest request) {	
 		LOG.error(this.getClass().getSimpleName() + ".tipoRecursoNotFound(RecursoNotFoundException ex, HttpServletRequest request) " + ex.getMessage());
-		ResponseDTO response = new ResponseDTO(HttpStatus.NOT_FOUND, ex.getMessage());
-		LOG.error(ex.getMessage());
-		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(new ResponseDefault(ex.getMessage()), HttpStatus.NOT_FOUND);
 	}
 	
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		
-		List<ErrorDTO> errors = ex.getBindingResult().getFieldErrors()
-        		.stream().map(error -> new ErrorDTO(error.getDefaultMessage()))
+		List<ErrorDefault> errors = ex.getBindingResult().getFieldErrors()
+        		.stream().map(error -> new ErrorDefault(error.getDefaultMessage()))
                 .collect(Collectors.toList());
-        
-        ResponseDTO response = new ResponseDTO(HttpStatus.BAD_REQUEST, "Campos inválidos", errors);
-        return new ResponseEntity<>(response, status);
+
+        return new ResponseEntity<>(new ResponseDefault("Campos inválidos", errors), status);
 	}
 }

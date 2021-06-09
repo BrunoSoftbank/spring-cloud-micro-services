@@ -1,4 +1,4 @@
-package br.com.softbank.batch.dto;
+package br.com.softbank.relatorio.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,12 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LaboratorioFromFileDTO {
+public class EnderecoResponse {
 
-	private String nome;
 	private String cidade;
 	private String bairro;
 	private String rua;
 	private String numero;
-	
 }

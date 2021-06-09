@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-import br.com.softbank.batch.dto.LaboratorioRequestDTO;
+import br.com.softbank.batch.request.LaboratorioRequest;
 
 @FeignClient("laboratorios")
 public interface LaboratorioIntegration {
 
 	@GetMapping("/v1/laboratorios")
-	public void save(@RequestHeader String Authorization, @RequestBody LaboratorioRequestDTO request);
+	public void save(@RequestHeader String Authorization, @RequestBody LaboratorioRequest request);
 }

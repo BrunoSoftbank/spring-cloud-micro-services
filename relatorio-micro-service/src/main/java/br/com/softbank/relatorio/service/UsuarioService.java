@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
-import br.com.softbank.relatorio.dto.UsuarioDTO;
+import br.com.softbank.relatorio.dto.RelatorioUsuarioDTO;
 import br.com.softbank.relatorio.integration.UsuarioIntegration;
 
 @Service
@@ -18,11 +18,11 @@ public class UsuarioService {
 	private UsuarioIntegration usuarioIntegration;
 
 	@HystrixCommand(fallbackMethod = "findAllFallback")
-	public List<UsuarioDTO> findAll(String Authorization) {
+	public List<RelatorioUsuarioDTO> findAll(String Authorization) {
 		return usuarioIntegration.findAll(Authorization);
 	}
 	
-	public List<UsuarioDTO> findAllFallback(String Authorization) {
+	public List<RelatorioUsuarioDTO> findAllFallback(String Authorization) {
 		return new ArrayList<>();
 	}
 }

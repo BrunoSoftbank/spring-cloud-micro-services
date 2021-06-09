@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
-import br.com.softbank.relatorio.dto.ExameDTO;
 import br.com.softbank.relatorio.integration.ExameIntegration;
+import br.com.softbank.relatorio.response.ExameResponse;
 
 @Service
 public class ExameService {
@@ -18,11 +18,11 @@ public class ExameService {
 	private ExameIntegration exameIntegration;
 
 	@HystrixCommand(fallbackMethod = "findAllFallback")
-	public List<ExameDTO> findAll(String Authorization) {
+	public List<ExameResponse> findAll(String Authorization) {
 		return exameIntegration.findAll(Authorization);
 	}
 	
-	public List<ExameDTO> findAllFallback(String Authorization) {
+	public List<ExameResponse> findAllFallback(String Authorization) {
 		return new ArrayList<>();
 	}
 }

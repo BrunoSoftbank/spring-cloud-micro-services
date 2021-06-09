@@ -8,11 +8,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-import br.com.softbank.batch.dto.LaboratorioRequestDTO;
 import br.com.softbank.batch.integration.RestIntegration;
+import br.com.softbank.batch.request.LaboratorioRequest;
 
 @Component
-public class LaboratorioWriter implements ItemWriter<LaboratorioRequestDTO> {
+public class LaboratorioWriter implements ItemWriter<LaboratorioRequest> {
 	
 	@Autowired
 	private RestIntegration restIntegration;
@@ -29,7 +29,7 @@ public class LaboratorioWriter implements ItemWriter<LaboratorioRequestDTO> {
 	*/
 
 	@Override
-	public void write(List<? extends LaboratorioRequestDTO> items) throws Exception {
+	public void write(List<? extends LaboratorioRequest> items) throws Exception {
 		items.forEach(item -> {
 			restIntegration.salvar(item);
 		});	

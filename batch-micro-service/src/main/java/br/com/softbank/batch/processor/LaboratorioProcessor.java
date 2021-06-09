@@ -3,18 +3,18 @@ package br.com.softbank.batch.processor;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
-import br.com.softbank.batch.dto.EnderecoDTO;
 import br.com.softbank.batch.dto.LaboratorioFromFileDTO;
-import br.com.softbank.batch.dto.LaboratorioRequestDTO;
+import br.com.softbank.batch.request.EnderecoRequest;
+import br.com.softbank.batch.request.LaboratorioRequest;
 
 @Component
-public class LaboratorioProcessor implements ItemProcessor<LaboratorioFromFileDTO, LaboratorioRequestDTO>{
+public class LaboratorioProcessor implements ItemProcessor<LaboratorioFromFileDTO, LaboratorioRequest>{
 
 	@Override
-	public LaboratorioRequestDTO process(LaboratorioFromFileDTO item) throws Exception {
-		LaboratorioRequestDTO request = new LaboratorioRequestDTO();
+	public LaboratorioRequest process(LaboratorioFromFileDTO item) throws Exception {
+		LaboratorioRequest request = new LaboratorioRequest();
 		request.setNome(item.getNome());
-		EnderecoDTO endereco = new EnderecoDTO();
+		EnderecoRequest endereco = new EnderecoRequest();
 		endereco.setCidade(item.getCidade());
 		endereco.setBairro(item.getBairro());
 		endereco.setRua(item.getRua());
