@@ -1,7 +1,6 @@
 package br.com.softbank.exame.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -27,10 +26,8 @@ public class ExameService {
 
 	@Autowired
 	private StatusService statusService;
-
 	@Autowired
 	private TipoExameService tipoExameService;
-
 	@Autowired
 	private ExameRepository exameRepository;
 
@@ -41,20 +38,14 @@ public class ExameService {
 
 	@Cacheable(cacheNames = "Exame", key = "#id")
 	public Exame findById(Long id) {
-		Optional<Exame> exameOptional = exameRepository.findById(id);
-		if (exameOptional.isPresent()) {
-			return exameOptional.get();
-		}
-		throw new ExameNotFoundException(String.format(ErrosDefaultEnum.EXAME_NAO_ENCONTRADO.getDescricao(), id));
+		return exameRepository.findById(id).orElseThrow(() ->new ExameNotFoundException(String.format(ErrosDefaultEnum.EXAME_NAO_ENCONTRADO.getDescricao(), id)));	
 	}
 
 	@Transactional
 	@CacheEvict(cacheNames = "Exame", allEntries = true)
 	public void deleteById(Long id) {
 		LOG.warn(this.getClass().getSimpleName() + ".deleteById(Long id) " + String.valueOf(id));
-
-		Exame exame = this.findById(id);
-		exameRepository.delete(exame);
+		exameRepository.delete(this.findById(id));
 	}
 
 	@Transactional
@@ -73,11 +64,10 @@ public class ExameService {
 
 	@Transactional
 	@CacheEvict(cacheNames = "Exame", allEntries = true)
-	public Exame update(Exame exame) {
+	public Exame update(Long id, Exame exame) {
+		LOG.warn(this.getClass().getSimpleName() + ".update(Long id, Exame exame) " + id + ", " + exame);
 
-		LOG.warn(this.getClass().getSimpleName() + ".update(Exame exame) " + exame);
-
-		Exame exameDB = this.findById(exame.getId());
+		Exame exameDB = this.findById(id);
 		exameDB.setNome(exame.getNome());
 
 		Tipo tipo = tipoExameService.findById(exame.getTipo().getId());

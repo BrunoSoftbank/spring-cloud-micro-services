@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.softbank.usuario.converter.UsuarioConverter;
 import br.com.softbank.usuario.enuns.ErrosDefaultEnum;
 import br.com.softbank.usuario.exception.UsuarioAlreadyExistsException;
 import br.com.softbank.usuario.exception.UsuarioNotFoundException;
@@ -38,10 +37,8 @@ public class UserService {
 	private RabbitEmailProducerIntegration emailProducer;
 	@Autowired
 	private Oauth2Integration oauth2Integration;
-	@Autowired
-	private UsuarioConverter usuarioConverter;
 	
-	public List<UsuarioResponse> findAll(String Authorization, int page, int limit) {
+	public List<Usuario> findAll(String Authorization, int page, int limit) {
 		UsuarioResponse authenticatedUser = getAuthenticatedUser(Authorization);
 		List<Usuario> usuarios = userRepository.findAll(PageRequest.of(page, limit > 0 ? limit : 6, Sort.Direction.ASC, "nome")).getContent();
 		
@@ -49,10 +46,10 @@ public class UserService {
 			usuarios = usuarios.stream().filter(u -> u.getEmail().equalsIgnoreCase(authenticatedUser.getEmail())).collect(Collectors.toList());
 		} 
 		
-		return usuarios.stream().map(u -> usuarioConverter.convertUsuarioEntityToUsuarioResponse(u)).collect(Collectors.toList());
+		return usuarios;
 	}
 
-	public UsuarioResponse save(Usuario usuario) {
+	public Usuario save(Usuario usuario) {
 		LOG.warn(this.getClass().getSimpleName() + ".save(Usuario usuario) " + usuario);
 		
 		Optional<Usuario> usuarioOptional = this.userRepository.findByEmail(usuario.getEmail());
@@ -66,7 +63,7 @@ public class UserService {
 		usuario = userRepository.save(usuario);
 
 		emailProducer.sendToQueue(new EmailRequest(usuario.getNome(), usuario.getEmail(), tokenService.save(usuario).getValor()));
-		return usuarioConverter.convertUsuarioEntityToUsuarioResponse(usuario);
+		return usuario;
 	}
 
 	public void update(String valorToken) {
@@ -87,15 +84,16 @@ public class UserService {
 		return oauth2Integration.getAuthenticatedUser(Authorization);
 	}
 
-	public UsuarioResponse findById(String Authorization, Long id) {
+	public Usuario findById(String Authorization, Long id) {
 		UsuarioResponse authenticatedUser = this.getAuthenticatedUser(Authorization);
 		Optional<Usuario> userOptional = userRepository.findById(id);
 		
 		if(userOptional.isPresent()) {
-			if(authenticatedUser.getPerfil().equalsIgnoreCase("ROLE_USER") && authenticatedUser.getId() != userOptional.get().getId()) {
+			Usuario usuario = userOptional.get();
+			if(authenticatedUser.getPerfil().equalsIgnoreCase("ROLE_USER") && authenticatedUser.getId() != usuario.getId()) {
 				throw new UsuarioNotFoundException(String.format(ErrosDefaultEnum.USUARIO_NAO_ENCONTRADO.getDescricao(), id));
 			}
-			return usuarioConverter.convertUsuarioEntityToUsuarioResponse(userOptional.get());
+			return usuario;
 		}
 		throw new UsuarioNotFoundException(String.format(ErrosDefaultEnum.USUARIO_NAO_ENCONTRADO.getDescricao(), id));
 	}
