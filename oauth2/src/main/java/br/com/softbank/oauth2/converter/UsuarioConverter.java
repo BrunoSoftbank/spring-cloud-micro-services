@@ -3,13 +3,13 @@ package br.com.softbank.oauth2.converter;
 import org.springframework.stereotype.Component;
 
 import br.com.softbank.oauth2.domain.Usuario;
-import br.com.softbank.oauth2.dto.UsuarioDTO;
+import br.com.softbank.oauth2.response.UsuarioResponse;
 
 @Component
 public class UsuarioConverter {
 
-	public UsuarioDTO convertUsuarioToUsuarioDTO(Usuario usuario) {
-		return new UsuarioDTO(usuario.getId(), usuario.getNome(), usuario.getUsername(), usuario.getAuthorities().stream().findFirst().get().getAuthority());
+	public UsuarioResponse convertUsuarioToUsuarioResponse(Usuario entity) {
+		return new UsuarioResponse(entity.getId(), entity.getNome(), entity.getUsername(), entity.getAuthorities().stream().findFirst().get().getAuthority());
 
 	}
 }

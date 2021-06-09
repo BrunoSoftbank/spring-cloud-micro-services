@@ -1,4 +1,4 @@
-package br.com.softbank.oauth2.dto;
+package br.com.softbank.oauth2.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioDTO {
+public class UsuarioResponse {
 
 	private Long id;
 	private String nome;

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -17,6 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "role")
 public class Role implements GrantedAuthority, Serializable {
 
 	private static final long serialVersionUID = -1462762839882091315L;

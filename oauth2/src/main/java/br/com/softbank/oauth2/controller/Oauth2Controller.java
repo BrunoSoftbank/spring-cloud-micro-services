@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softbank.oauth2.converter.UsuarioConverter;
 import br.com.softbank.oauth2.domain.Usuario;
-import br.com.softbank.oauth2.dto.UsuarioDTO;
+import br.com.softbank.oauth2.response.UsuarioResponse;
 
 @RestController
 @RequestMapping("/v1/oauth")
@@ -19,7 +19,7 @@ public class Oauth2Controller {
 	private UsuarioConverter usuarioConverter;
 
 	@GetMapping("/usuario")
-	public UsuarioDTO user(@RequestHeader String Authorization) {
-		return usuarioConverter.convertUsuarioToUsuarioDTO((Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal());		
+	public UsuarioResponse user(@RequestHeader String Authorization) {
+		return usuarioConverter.convertUsuarioToUsuarioResponse((Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal());		
 	}
 }
