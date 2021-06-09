@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.softbank.consulta.dto.ConsultaDTO;
-import br.com.softbank.consulta.dto.NewConsultaDTO;
+import br.com.softbank.consulta.request.ConsultaCustomRequest;
+import br.com.softbank.consulta.response.ConsultaCustomResponse;
 import br.com.softbank.consulta.service.ConsultaService;
 import io.swagger.annotations.Api;
 
@@ -29,17 +29,17 @@ public class ConsultaController {
 	private ConsultaService consultaService;
 	
 	@PostMapping
-	public ResponseEntity<ConsultaDTO> salvar(@RequestHeader String Authorization, @Valid @RequestBody NewConsultaDTO request) {
+	public ResponseEntity<ConsultaCustomResponse> salvar(@RequestHeader String Authorization, @Valid @RequestBody ConsultaCustomRequest request) {
 		return ResponseEntity.ok(consultaService.save(Authorization, request));
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<ConsultaDTO>> findAll(@RequestHeader String Authorization) {
+	public ResponseEntity<List<ConsultaCustomResponse>> findAll(@RequestHeader String Authorization) {
 		return ResponseEntity.ok(consultaService.findAll(Authorization));
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<ConsultaDTO> findById(@RequestHeader String Authorization, @PathVariable Long id) {
+	public ResponseEntity<ConsultaCustomResponse> findById(@RequestHeader String Authorization, @PathVariable Long id) {
 		return ResponseEntity.ok(consultaService.findById(Authorization, id));
 	}
 	

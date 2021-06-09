@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.softbank.consulta.config.SoapHeaderHandlerResolverImpl;
-import br.com.softbank.consulta.dto.ConsultaDTO;
-import br.com.softbank.consulta.dto.ExameDTO;
-import br.com.softbank.consulta.dto.LaboratorioDTO;
-import br.com.softbank.consulta.dto.NewConsultaDTO;
-import br.com.softbank.consulta.dto.UsuarioDTO;
 import br.com.softbank.consulta.enuns.ErrosDefaultEnum;
 import br.com.softbank.consulta.exception.ConsultaAlreadyExistsException;
 import br.com.softbank.consulta.exception.ConsultaNotFoundException;
+import br.com.softbank.consulta.request.ConsultaCustomRequest;
+import br.com.softbank.consulta.response.ConsultaCustomResponse;
+import br.com.softbank.consulta.response.ExameResponse;
+import br.com.softbank.consulta.response.LaboratorioResponse;
+import br.com.softbank.consulta.response.UsuarioResponse;
 import br.com.softbank.consulta.soap.ConsultaPort;
 import br.com.softbank.consulta.soap.ConsultaPortService;
 import br.com.softbank.consulta.soap.ConsultaRequest;
@@ -52,10 +52,10 @@ public class ConsultaService {
 		port = consultaPortService.getConsultaPortSoap11();
 	}
 
-	public ConsultaDTO save(String Authorization, NewConsultaDTO newConsultaDTO) {
-		UsuarioDTO usuarioDTO = usuarioService.getAuthenticatedUser(Authorization);
-		ExameDTO exameDTO = exameService.findById(Authorization, newConsultaDTO.getExameId());
-		LaboratorioDTO laboratorioDTO = laboratorioService.findById(Authorization, newConsultaDTO.getLaboratorioId());
+	public ConsultaCustomResponse save(String Authorization, ConsultaCustomRequest newConsultaDTO) {
+		UsuarioResponse usuarioDTO = usuarioService.getAuthenticatedUser(Authorization);
+		ExameResponse exameDTO = exameService.findById(Authorization, newConsultaDTO.getExameId());
+		LaboratorioResponse laboratorioDTO = laboratorioService.findById(Authorization, newConsultaDTO.getLaboratorioId());
 		
 		this.verificaSeJaExisteConsultaAgendada(usuarioDTO, exameDTO, laboratorioDTO);
 
@@ -68,13 +68,13 @@ public class ConsultaService {
 		
 		SalvarConsultaResponse response = port.salvarConsulta(salvarConsultaRequest);
 
-		return new ConsultaDTO(Long.valueOf(response.getConsultaResponse().getId()), usuarioDTO, exameDTO, laboratorioDTO);
+		return new ConsultaCustomResponse(Long.valueOf(response.getConsultaResponse().getId()), usuarioDTO, exameDTO, laboratorioDTO);
 	}
 
-	public List<ConsultaDTO> findAll(String Authorization) {
-		List<ConsultaDTO> consultas = new ArrayList<>();
+	public List<ConsultaCustomResponse> findAll(String Authorization) {
+		List<ConsultaCustomResponse> consultas = new ArrayList<>();
 		
-		UsuarioDTO usuarioLogado = usuarioService.getAuthenticatedUser(Authorization);
+		UsuarioResponse usuarioLogado = usuarioService.getAuthenticatedUser(Authorization);
 		FindAllConsultaRequest request = new FindAllConsultaRequest();	
 		FindAllConsultaResponse response = port.findAllConsulta(request);
 		
@@ -89,10 +89,10 @@ public class ConsultaService {
 	}
 
 	@SuppressWarnings("restriction")
-	public ConsultaDTO findById(String Authorization, Long id) {
-		ConsultaDTO consultaDTO = null;
+	public ConsultaCustomResponse findById(String Authorization, Long id) {
+		ConsultaCustomResponse consultaDTO = null;
 		
-		UsuarioDTO usuarioLogado = usuarioService.getAuthenticatedUser(Authorization);
+		UsuarioResponse usuarioLogado = usuarioService.getAuthenticatedUser(Authorization);
 		FindConsultaByIdRequest request = new FindConsultaByIdRequest();
 		request.setId(Math.toIntExact(id));
 		
@@ -121,7 +121,7 @@ public class ConsultaService {
 	
 	// Se ja existir consulta lança exceção, caso contrário cria uma nova
 	@SuppressWarnings("restriction")
-	private void verificaSeJaExisteConsultaAgendada(UsuarioDTO usuarioDTO, ExameDTO exameDTO, LaboratorioDTO laboratorioDTO) {		
+	private void verificaSeJaExisteConsultaAgendada(UsuarioResponse usuarioDTO, ExameResponse exameDTO, LaboratorioResponse laboratorioDTO) {		
 		FindConsultaByFiltersRequest findConsultaByFiltersRequest = new FindConsultaByFiltersRequest();
 		ConsultaRequest request = new ConsultaRequest();
 		request.setUsuarioId(Math.toIntExact(usuarioDTO.getId()));
@@ -137,10 +137,10 @@ public class ConsultaService {
 		}		
 	}
 	
-	private ConsultaDTO convertConsultaResponseToEntity(String Authorization, ConsultaResponse response) {
-		UsuarioDTO usuarioDTO = usuarioService.findById(Authorization, Long.valueOf(response.getUsuarioId()), Long.valueOf(response.getId()));
-		ExameDTO exameDTO = exameService.findById(Authorization, Long.valueOf(response.getExameId()));
-		LaboratorioDTO laboratorioDTO = laboratorioService.findById(Authorization, Long.valueOf(response.getLaboratorioId()));	
-		return new ConsultaDTO(Long.valueOf(response.getId()), usuarioDTO, exameDTO, laboratorioDTO);
+	private ConsultaCustomResponse convertConsultaResponseToEntity(String Authorization, ConsultaResponse response) {
+		UsuarioResponse usuarioDTO = usuarioService.findById(Authorization, Long.valueOf(response.getUsuarioId()), Long.valueOf(response.getId()));
+		ExameResponse exameDTO = exameService.findById(Authorization, Long.valueOf(response.getExameId()));
+		LaboratorioResponse laboratorioDTO = laboratorioService.findById(Authorization, Long.valueOf(response.getLaboratorioId()));	
+		return new ConsultaCustomResponse(Long.valueOf(response.getId()), usuarioDTO, exameDTO, laboratorioDTO);
 	}
 }

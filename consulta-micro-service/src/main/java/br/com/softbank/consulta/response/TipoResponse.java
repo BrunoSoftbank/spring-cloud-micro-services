@@ -1,4 +1,4 @@
-package br.com.softbank.consultawebservice.model;
+package br.com.softbank.consulta.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Login {
+public class TipoResponse {
 
-	private String usuario;
-	private String senha;
+	private String descricao;
 }

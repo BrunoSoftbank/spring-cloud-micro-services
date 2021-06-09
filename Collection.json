@@ -40,12 +40,12 @@
 						},
 						{
 							"key": "username",
-							"value": "bruno.softbank@gmail.com",
+							"value": "zeus.softbank@gmail.com",
 							"type": "text"
 						},
 						{
 							"key": "password",
-							"value": "bruno123",
+							"value": "zeus123",
 							"type": "text"
 						}
 					]
@@ -64,6 +64,40 @@
 						"token"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Claims",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "dd4f2b16-1370-47e5-8c08-206c76b66c46",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/api/oauth2/v1/oauth/usuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"api",
+						"oauth2",
+						"v1",
+						"oauth",
+						"usuario"
+					]
+				},
+				"description": "Get authenticated user claims"
 			},
 			"response": []
 		},
@@ -378,7 +412,7 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8765/api/usuarios/v1/usuarios/$2a$10$a1hD0077.HKdhG3cyTgkAOOATseUHqECVkdbckTHzYy1ADWzRlvu",
+					"raw": "http://localhost:8765/api/usuarios/v1/usuarios?token=$2a$10$ZuU9MYBRD13kG1NxeZYlfOkLiUfJnLYQNFlPoYfq63pjthQBhTT6S",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -388,45 +422,16 @@
 						"api",
 						"usuarios",
 						"v1",
-						"usuarios",
-						"$2a$10$a1hD0077.HKdhG3cyTgkAOOATseUHqECVkdbckTHzYy1ADWzRlvu"
-					]
-				},
-				"description": "Active user by token ( The token is send per email when a new user is created )"
-			},
-			"response": []
-		},
-		{
-			"name": "Get User Claims",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
+						"usuarios"
+					],
+					"query": [
 						{
 							"key": "token",
-							"value": "b61d2c98-a170-4b34-8de2-d026b2083302",
-							"type": "string"
+							"value": "$2a$10$ZuU9MYBRD13kG1NxeZYlfOkLiUfJnLYQNFlPoYfq63pjthQBhTT6S"
 						}
 					]
 				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8765/api/oauth2/v1/oauth/usuario",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8765",
-					"path": [
-						"api",
-						"oauth2",
-						"v1",
-						"oauth",
-						"usuario"
-					]
-				},
-				"description": "Get authenticated user claims"
+				"description": "Active user by token ( The token is send per email when a new user is created )"
 			},
 			"response": []
 		},
@@ -557,7 +562,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"value": "668fb424-b2bf-4f95-9149-cab60c91f984",
 							"type": "string"
 						}
 					]
@@ -566,7 +571,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": 1,\n  \"nome\": \"Exame de covid\",\n  \"tipo\": {\n    \"id\": 1\n  }\n}",
+					"raw": "{\n  \"nome\": \"Exame de Raio X Digital\",\n  \"tipo\": {\n    \"id\": 2\n  }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -574,7 +579,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8765/api/exames/v1/exames",
+					"raw": "http://localhost:8765/api/exames/v1/exames/6",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -584,7 +589,8 @@
 						"api",
 						"exames",
 						"v1",
-						"exames"
+						"exames",
+						"6"
 					]
 				},
 				"description": "Update a exam"
@@ -667,7 +673,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"value": "ba7ebe19-5c79-45b6-9b19-14857741db28",
 							"type": "string"
 						}
 					]
@@ -700,7 +706,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"value": "ba7ebe19-5c79-45b6-9b19-14857741db28",
 							"type": "string"
 						}
 					]
@@ -708,7 +714,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8765/api/exames/v1/exames/2",
+					"raw": "http://localhost:8765/api/exames/v1/exames/7",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -719,7 +725,7 @@
 						"exames",
 						"v1",
 						"exames",
-						"2"
+						"7"
 					]
 				},
 				"description": "Find a exam by id"
@@ -734,7 +740,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"value": "d579e18b-ea94-40bf-9edd-37431a7e565e",
 							"type": "string"
 						}
 					]
@@ -743,7 +749,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"endereco\": {\n    \"bairro\": \"Grajau\",\n    \"cidade\": \"São Paulo\",\n    \"numero\": \"345\",\n    \"rua\": \"Belmira Marin\"\n  },\n  \"nome\": \"Unidade Grajau\"\n}",
+					"raw": "{\n  \"endereco\": {\n    \"bairro\": \"Santana\",\n    \"cidade\": \"São Paulo\",\n    \"numero\": \"311\",\n    \"rua\": \"Darzan\"\n  },\n  \"nome\": \"Unidade Santana\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -776,7 +782,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"value": "d579e18b-ea94-40bf-9edd-37431a7e565e",
 							"type": "string"
 						}
 					]
@@ -785,7 +791,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 3,\n    \"nome\": \"Unidade Grajau 2\",\n    \"endereco\": {\n        \"cidade\": \"São Paulo\",\n        \"bairro\": \"Grajau\",\n        \"rua\": \"Belmira Marim\",\n        \"numero\": \"345\"\n    }\n}",
+					"raw": "{\n  \"endereco\": {\n    \"bairro\": \"Itaquera\",\n    \"cidade\": \"São Paulo\",\n    \"numero\": \"345\",\n    \"rua\": \"7 de Novembro\"\n  },\n  \"nome\": \"Unidade Penha\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -793,7 +799,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8765/api/laboratorios/v1/laboratorios",
+					"raw": "http://localhost:8765/api/laboratorios/v1/laboratorios/8",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -803,7 +809,8 @@
 						"api",
 						"laboratorios",
 						"v1",
-						"laboratorios"
+						"laboratorios",
+						"8"
 					]
 				},
 				"description": "Update a Laboratory"
@@ -818,7 +825,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"value": "d579e18b-ea94-40bf-9edd-37431a7e565e",
 							"type": "string"
 						}
 					]
@@ -826,7 +833,7 @@
 				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8765/api/laboratorios/v1/laboratorios/1",
+					"raw": "http://localhost:8765/api/laboratorios/v1/laboratorios/8",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -837,7 +844,7 @@
 						"laboratorios",
 						"v1",
 						"laboratorios",
-						"1"
+						"8"
 					]
 				},
 				"description": "Update a laboratory Status"
@@ -852,7 +859,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"value": "d579e18b-ea94-40bf-9edd-37431a7e565e",
 							"type": "string"
 						}
 					]
@@ -885,7 +892,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"value": "d579e18b-ea94-40bf-9edd-37431a7e565e",
 							"type": "string"
 						}
 					]
@@ -893,7 +900,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8765/api/laboratorios/v1/laboratorios/2",
+					"raw": "http://localhost:8765/api/laboratorios/v1/laboratorios/8",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -904,7 +911,7 @@
 						"laboratorios",
 						"v1",
 						"laboratorios",
-						"2"
+						"8"
 					]
 				},
 				"description": "Delete a laboratory"
@@ -919,7 +926,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"value": "d579e18b-ea94-40bf-9edd-37431a7e565e",
 							"type": "string"
 						}
 					]
@@ -953,7 +960,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"value": "65a23d99-9e11-4c26-81eb-7c6811de682a",
 							"type": "string"
 						}
 					]
@@ -962,7 +969,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"exame_id\": 3,\n  \"laboratorio_id\": 1\n}",
+					"raw": "{\n  \"exame_id\": 5,\n  \"laboratorio_id\": 8\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -995,7 +1002,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"value": "65a23d99-9e11-4c26-81eb-7c6811de682a",
 							"type": "string"
 						}
 					]
@@ -1003,7 +1010,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8765/api/consultas/v1/consultas/1",
+					"raw": "http://localhost:8765/api/consultas/v1/consultas/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1014,7 +1021,7 @@
 						"consultas",
 						"v1",
 						"consultas",
-						"1"
+						"4"
 					]
 				},
 				"description": "Delete an Appointment"
@@ -1029,7 +1036,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"value": "65a23d99-9e11-4c26-81eb-7c6811de682a",
 							"type": "string"
 						}
 					]
@@ -1061,7 +1068,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "f7fde1b0-9b89-4340-b372-4f628ca87303",
+							"value": "65a23d99-9e11-4c26-81eb-7c6811de682a",
 							"type": "string"
 						}
 					]
@@ -1069,7 +1076,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8765/api/consultas/v1/consultas/3",
+					"raw": "http://localhost:8765/api/consultas/v1/consultas/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1080,7 +1087,7 @@
 						"consultas",
 						"v1",
 						"consultas",
-						"3"
+						"4"
 					]
 				}
 			},

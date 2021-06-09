@@ -10,11 +10,11 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.com.softbank.consulta.dto.ExameDTO;
-import br.com.softbank.consulta.dto.TipoDTO;
 import br.com.softbank.consulta.exception.BusinessException;
 import br.com.softbank.consulta.exception.GenericException;
 import br.com.softbank.consulta.integration.ExameIntegration;
+import br.com.softbank.consulta.response.ExameResponse;
+import br.com.softbank.consulta.response.TipoResponse;
 
 @RunWith(SpringRunner.class)
 public class ExameServiceTest {
@@ -25,8 +25,8 @@ public class ExameServiceTest {
 	@MockBean
 	private ExameIntegration exameIntegration;
 	
-	private ExameDTO exame;
-	private TipoDTO tipo;
+	private ExameResponse exame;
+	private TipoResponse tipo;
 	private static final Long ID = 1L;
 	private static final String AUTHORIZATION = "Bearer token value";
 	
@@ -34,11 +34,11 @@ public class ExameServiceTest {
 	public void initialSetUp() {
 		MockitoAnnotations.initMocks(this);
 		
-		exame = new ExameDTO();
+		exame = new ExameResponse();
 		exame.setId(ID);
 		exame.setNome("Exame de Sangue");
 		
-		tipo = new TipoDTO();
+		tipo = new TipoResponse();
 		tipo.setDescricao("Exame Clínico");
 		exame.setTipo(tipo);
 	}
