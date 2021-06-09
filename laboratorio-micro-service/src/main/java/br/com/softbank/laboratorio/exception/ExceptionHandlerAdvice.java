@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import br.com.softbank.laboratorio.dto.ErrorDTO;
-import br.com.softbank.laboratorio.dto.ResponseDTO;
+import br.com.softbank.laboratorio.response.ErrorDefault;
+import br.com.softbank.laboratorio.response.ResponseDefault;
 
 @RestControllerAdvice
 public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
@@ -25,30 +25,25 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
 	private static final Logger LOG = LoggerFactory.getLogger(ExceptionHandlerAdvice.class);
 	
 	@ExceptionHandler(LaboratorioNotFoundException.class)
-	public ResponseEntity<ResponseDTO> laboratorioNotFound(LaboratorioNotFoundException ex, HttpServletRequest request) {	
+	public ResponseEntity<ResponseDefault> laboratorioNotFound(LaboratorioNotFoundException ex, HttpServletRequest request) {	
 		LOG.error(this.getClass().getSimpleName() + ".laboratorioNotFound(LaboratorioNotFoundException ex, HttpServletRequest request) " + ex.getMessage());
-		ResponseDTO response = new ResponseDTO(HttpStatus.NOT_FOUND, ex.getMessage());
-		LOG.error(ex.getMessage());
-		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(new ResponseDefault(ex.getMessage()), HttpStatus.NOT_FOUND);
 	}
 	
 	@ExceptionHandler(LaboratorioAlreadyExistsException.class)
-	public ResponseEntity<ResponseDTO> laboratorioAlreadyExistsException(LaboratorioAlreadyExistsException ex, HttpServletRequest request) {	
+	public ResponseEntity<ResponseDefault> laboratorioAlreadyExistsException(LaboratorioAlreadyExistsException ex, HttpServletRequest request) {	
 		LOG.error(this.getClass().getSimpleName() + ".laboratorioAlreadyExistsException(LaboratorioAlreadyExistsException ex, HttpServletRequest request) " + ex.getMessage());
-		ResponseDTO response = new ResponseDTO(HttpStatus.BAD_REQUEST, ex.getMessage());
-		LOG.error(ex.getMessage());
-		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(new ResponseDefault(ex.getMessage()), HttpStatus.BAD_REQUEST);
 	}
 	
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		
-		List<ErrorDTO> errors = ex.getBindingResult().getFieldErrors()
-        		.stream().map(error -> new ErrorDTO(error.getDefaultMessage()))
+		List<ErrorDefault> errors = ex.getBindingResult().getFieldErrors()
+        		.stream().map(error -> new ErrorDefault(error.getDefaultMessage()))
                 .collect(Collectors.toList());
-        
-        ResponseDTO response = new ResponseDTO(HttpStatus.BAD_REQUEST, "Campos inválidos", errors);
-        return new ResponseEntity<>(response, status);
+
+        return new ResponseEntity<>(new ResponseDefault("Campos inválidos", errors), status);
 	}
 }

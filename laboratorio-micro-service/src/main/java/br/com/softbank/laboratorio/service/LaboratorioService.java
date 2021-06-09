@@ -41,22 +41,14 @@ public class LaboratorioService {
 
 	@Cacheable(cacheNames = "Laboratorio", key = "#id")
 	public Laboratorio findById(Long id) {
-		Optional<Laboratorio> laboratorioOptional = laboratorioRepository.findById(id);
-		if (laboratorioOptional.isPresent()) {
-			return laboratorioOptional.get();
-		}
-		throw new LaboratorioNotFoundException(
-				String.format(ErrosDefaultEnum.LABORATORIO_NAO_ENCONTRADO.getDescricao(), id));
+		return laboratorioRepository.findById(id).orElseThrow(() -> new LaboratorioNotFoundException(String.format(ErrosDefaultEnum.LABORATORIO_NAO_ENCONTRADO.getDescricao(), id)));
 	}
 
 	@Transactional
 	@CacheEvict(cacheNames = "Laboratorio", allEntries = true)
 	public void deleteById(Long id) {
 		LOG.warn(this.getClass().getSimpleName() + ".deleteById(Long id) " + String.valueOf(id));
-
-		Laboratorio laboratorio = this.findById(id);
-		laboratorioRepository.delete(laboratorio);
-
+		laboratorioRepository.delete(this.findById(id));
 	}
 
 	@Transactional
@@ -86,14 +78,13 @@ public class LaboratorioService {
 
 	@Transactional
 	@CacheEvict(cacheNames = "Laboratorio", allEntries = true)
-	public Laboratorio update(Laboratorio laboratorio) {
-
+	public Laboratorio update(Long id, Laboratorio laboratorio) {
 		LOG.warn(this.getClass().getSimpleName() + ".update(Laboratorio laboratorio) " + laboratorio);
 
-		Laboratorio laboratorioDB = this.findById(laboratorio.getId());
+		Laboratorio laboratorioDB = this.findById(id);
 		
 		Optional<Laboratorio> laboratorioOptional = this.laboratorioRepository.findByNome(laboratorio.getNome());
-		if(laboratorioOptional.isPresent() && laboratorioDB.getId().equals(laboratorioOptional.get().getId())) {
+		if(laboratorioOptional.isPresent() && !laboratorioDB.getId().equals(laboratorioOptional.get().getId())) {
 			throw new LaboratorioAlreadyExistsException(
 					String.format(ErrosDefaultEnum.LABORATORIO_JA_CADASTRADO.getDescricao(), laboratorio.getNome()));
 		}
