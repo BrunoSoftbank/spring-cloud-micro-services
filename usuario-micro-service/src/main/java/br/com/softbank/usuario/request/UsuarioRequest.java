@@ -1,4 +1,4 @@
-package br.com.softbank.usuario.dto;
+package br.com.softbank.usuario.request;
 
 import javax.validation.constraints.NotBlank;
 
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioDTO {
+public class UsuarioRequest {
 	
 	@NotBlank(message = "O nome do usuário é obrigatório")
 	private String nome;

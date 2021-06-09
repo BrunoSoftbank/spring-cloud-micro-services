@@ -1,4 +1,4 @@
-package br.com.softbank.usuario.dto;
+package br.com.softbank.usuario.request;
 
 import com.google.gson.Gson;
 
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioEmailDTO {
+public class EmailRequest {
 	
 	private String nome;
 	private String email;

@@ -13,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.softbank.usuario.converter.UsuarioConverter;
-import br.com.softbank.usuario.dto.UsuarioEmailDTO;
 import br.com.softbank.usuario.enuns.ErrosDefaultEnum;
 import br.com.softbank.usuario.exception.UsuarioAlreadyExistsException;
 import br.com.softbank.usuario.exception.UsuarioNotFoundException;
@@ -23,6 +22,7 @@ import br.com.softbank.usuario.model.Role;
 import br.com.softbank.usuario.model.Token;
 import br.com.softbank.usuario.model.Usuario;
 import br.com.softbank.usuario.repository.UsuarioRepository;
+import br.com.softbank.usuario.request.EmailRequest;
 import br.com.softbank.usuario.response.UsuarioResponse;
 
 @Service
@@ -49,7 +49,7 @@ public class UserService {
 			usuarios = usuarios.stream().filter(u -> u.getEmail().equalsIgnoreCase(authenticatedUser.getEmail())).collect(Collectors.toList());
 		} 
 		
-		return usuarios.stream().map(u -> usuarioConverter.convertUsuarioToUsuarioResponse(u)).collect(Collectors.toList());
+		return usuarios.stream().map(u -> usuarioConverter.convertUsuarioEntityToUsuarioResponse(u)).collect(Collectors.toList());
 	}
 
 	public UsuarioResponse save(Usuario usuario) {
@@ -65,8 +65,8 @@ public class UserService {
 		usuario.setIsAtivo(false);
 		usuario = userRepository.save(usuario);
 
-		emailProducer.sendToQueue(new UsuarioEmailDTO(usuario.getNome(), usuario.getEmail(), tokenService.save(usuario).getValor()));
-		return usuarioConverter.convertUsuarioToUsuarioResponse(usuario);
+		emailProducer.sendToQueue(new EmailRequest(usuario.getNome(), usuario.getEmail(), tokenService.save(usuario).getValor()));
+		return usuarioConverter.convertUsuarioEntityToUsuarioResponse(usuario);
 	}
 
 	public void update(String valorToken) {
@@ -95,7 +95,7 @@ public class UserService {
 			if(authenticatedUser.getPerfil().equalsIgnoreCase("ROLE_USER") && authenticatedUser.getId() != userOptional.get().getId()) {
 				throw new UsuarioNotFoundException(String.format(ErrosDefaultEnum.USUARIO_NAO_ENCONTRADO.getDescricao(), id));
 			}
-			return usuarioConverter.convertUsuarioToUsuarioResponse(userOptional.get());
+			return usuarioConverter.convertUsuarioEntityToUsuarioResponse(userOptional.get());
 		}
 		throw new UsuarioNotFoundException(String.format(ErrosDefaultEnum.USUARIO_NAO_ENCONTRADO.getDescricao(), id));
 	}

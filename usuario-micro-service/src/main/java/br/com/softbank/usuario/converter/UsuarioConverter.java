@@ -4,19 +4,19 @@ import java.time.LocalDate;
 
 import org.springframework.stereotype.Component;
 
-import br.com.softbank.usuario.dto.UsuarioDTO;
 import br.com.softbank.usuario.model.Usuario;
+import br.com.softbank.usuario.request.UsuarioRequest;
 import br.com.softbank.usuario.response.UsuarioResponse;
 
 @Component
 public class UsuarioConverter {
 	
-	public Usuario convertUsuarioDTOToEntity(UsuarioDTO usuarioDTO) {
-		return new Usuario(usuarioDTO.getNome(), usuarioDTO.getEmail(), usuarioDTO.getSenha(), LocalDate.now());
+	public Usuario convertUsuarioRequestToUsuarioEntity(UsuarioRequest request) {
+		return new Usuario(request.getNome(), request.getEmail(), request.getSenha(), LocalDate.now());
 	}
 	
-	public UsuarioResponse convertUsuarioToUsuarioResponse(Usuario usuario) {
-		return new UsuarioResponse(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getIsAtivo(), usuario.getRoles().get(0).getNome(), usuario.getDataCadastro());
+	public UsuarioResponse convertUsuarioEntityToUsuarioResponse(Usuario entity) {
+		return new UsuarioResponse(entity.getId(), entity.getNome(), entity.getEmail(), entity.getIsAtivo(), entity.getRoles().get(0).getNome(), entity.getDataCadastro());
 	}
 
 }

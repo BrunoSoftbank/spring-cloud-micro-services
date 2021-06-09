@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softbank.usuario.converter.UsuarioConverter;
-import br.com.softbank.usuario.dto.UsuarioDTO;
+import br.com.softbank.usuario.request.UsuarioRequest;
 import br.com.softbank.usuario.response.UsuarioResponse;
 import br.com.softbank.usuario.service.UserService;
 import io.swagger.annotations.Api;
@@ -36,11 +36,11 @@ public class UsuarioController {
 
 	@PostMapping
 	@ApiOperation(value = "Cadastro de usuários")
-	public ResponseEntity<UsuarioResponse> save(@Valid @RequestBody UsuarioDTO request) {
-		return new ResponseEntity<UsuarioResponse>(userService.save(usuarioConverter.convertUsuarioDTOToEntity(request)), HttpStatus.CREATED);
+	public ResponseEntity<UsuarioResponse> save(@Valid @RequestBody UsuarioRequest request) {
+		return new ResponseEntity<UsuarioResponse>(userService.save(usuarioConverter.convertUsuarioRequestToUsuarioEntity(request)), HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/{token}")
+	@PutMapping("/token/{token}")
 	@ApiOperation(value = "Ativação de usuário através do Token")
 	public ResponseEntity<Void> update(@PathVariable String token) {
 		userService.update(token);

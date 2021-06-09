@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import br.com.softbank.usuario.dto.ErrorDTO;
-import br.com.softbank.usuario.dto.ResponseDTO;
+import br.com.softbank.usuario.response.ErrorDefault;
+import br.com.softbank.usuario.response.ResponseDefault;
 
 @RestControllerAdvice
 public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
@@ -25,31 +25,31 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
 	private static final Logger LOG = LoggerFactory.getLogger(ExceptionHandlerAdvice.class);
 	
 	@ExceptionHandler(TokenInvalidException.class)
-	public ResponseEntity<ResponseDTO> tokenInvalidException(TokenInvalidException ex, HttpServletRequest request) {	
+	public ResponseEntity<ResponseDefault> tokenInvalidException(TokenInvalidException ex, HttpServletRequest request) {	
 		LOG.error(this.getClass().getSimpleName() + ".tokenInvalidException(TokenInvalidException ex, HttpServletRequest request) " + ex.getMessage());		
-		return new ResponseEntity<>(new ResponseDTO(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(new ResponseDefault(ex.getMessage()), HttpStatus.NOT_FOUND);
 	}	
 	
 	@ExceptionHandler(UsuarioNotFoundException.class)
-	public ResponseEntity<ResponseDTO> tokenInvalidException(UsuarioNotFoundException ex, HttpServletRequest request) {	
+	public ResponseEntity<ResponseDefault> tokenInvalidException(UsuarioNotFoundException ex, HttpServletRequest request) {	
 		LOG.error(this.getClass().getSimpleName() + ".usuarioNotFoundException(UsuarioNotFoundException ex, HttpServletRequest request) " + ex.getMessage());
-		return new ResponseEntity<>(new ResponseDTO(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(new ResponseDefault(ex.getMessage()), HttpStatus.NOT_FOUND);
 	}	
 	
 	@ExceptionHandler(UsuarioAlreadyExistsException.class)
-	public ResponseEntity<ResponseDTO> usuarioAlreadyExistsException(UsuarioAlreadyExistsException ex, HttpServletRequest request) {	
+	public ResponseEntity<ResponseDefault> usuarioAlreadyExistsException(UsuarioAlreadyExistsException ex, HttpServletRequest request) {	
 		LOG.error(this.getClass().getSimpleName() + ".usuarioAlreadyExistsException(UsuarioAlreadyExistsException ex, HttpServletRequest request) " + ex.getMessage());		
-		return new ResponseEntity<>(new ResponseDTO(HttpStatus.BAD_REQUEST, ex.getMessage()), HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(new ResponseDefault(ex.getMessage()), HttpStatus.BAD_REQUEST);
 	}
 
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		
-		List<ErrorDTO> errors = ex.getBindingResult().getFieldErrors()
-        		.stream().map(error -> new ErrorDTO(error.getDefaultMessage()))
+		List<ErrorDefault> errors = ex.getBindingResult().getFieldErrors()
+        		.stream().map(error -> new ErrorDefault(error.getDefaultMessage()))
                 .collect(Collectors.toList());
         
-        return new ResponseEntity<>(new ResponseDTO(HttpStatus.BAD_REQUEST, "Invalid fields", errors), status);
+        return new ResponseEntity<>(new ResponseDefault("Invalid fields", errors), status);
 	}
 }

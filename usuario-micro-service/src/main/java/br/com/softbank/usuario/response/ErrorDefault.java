@@ -1,4 +1,4 @@
-package br.com.softbank.usuario.dto;
+package br.com.softbank.usuario.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ErrorDTO {
+public class ErrorDefault {
 
 	private String message;
 }
