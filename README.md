@@ -24,3 +24,5 @@ wsimport -s src -p br.com.softbank.consulta.soap http://localhost:8080/ws/consul
 sftp -P 2222 admin@localhost
 
 
+mongodb://root:*****@127.0.0.1:27017/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false
+

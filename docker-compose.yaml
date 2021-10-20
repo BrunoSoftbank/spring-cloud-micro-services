@@ -14,6 +14,43 @@ services:
     security_opt:
       - seccomp:unconfined
 
+  postgres:
+    image: postgres
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    networks:
+      - network
+    restart: unless-stopped
+
+  sqlLite:
+    image: nouchka/sqlite3:latest
+    container_name: sqlLite
+    volumes:
+      - sqlLite:/root/db
+    stdin_open: true
+    tty: true
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo_user
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo:/data/db
+    networks:
+      - network
+             
+
   redis:
     image: redis:alpine
     container_name: redis
@@ -30,25 +67,6 @@ services:
           - 5672:5672
           - 15672:15672  
 
-  sonarqube:
-    image: sonarqube
-    container_name: sonarqube
-    expose:
-      - 9000
-    ports:
-      - "127.0.0.1:9000:9000"
-    networks:
-      - sonarnet
-    environment:
-      - sonar.jdbc:mysql://localhost:3306/sonar
-      - sonar.jdbc.username=root
-      - sonar.jdbc.password=123456
-    volumes:
-      - sonarqube_conf:/opt/sonarqube/conf
-      - sonarqube_data:/opt/sonarqube/data
-      - sonarqube_extensions:/opt/sonarqube/extensions
-      - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
-
   sftp:
     image: atmoz/sftp
     container_name: sftp
@@ -57,14 +75,11 @@ services:
     command: admin:admin123:::upload
 
 networks:
-  sonarnet:
+  network:
 
 volumes:
-  sonarqube_conf:
-  sonarqube_data:
-  sonarqube_extensions:
-  sonarqube_bundled-plugins:
   mysql:
-
- 
+  postgres:
+  mongo:
+  sqlLite:
 
