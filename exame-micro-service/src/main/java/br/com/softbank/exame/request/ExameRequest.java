@@ -16,6 +16,6 @@ public class ExameRequest {
 	@NotBlank(message = "O nome do exame é obrigatório")
 	private String nome;
 	@Valid
-	@NotNull(message = "O tipo é obrigatório")
-	private TipoRequest tipo;
+	@NotNull(message = "A descricao do exame é obrigatória")
+	private String descricao;
 }

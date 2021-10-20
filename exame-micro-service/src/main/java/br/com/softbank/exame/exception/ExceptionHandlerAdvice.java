@@ -30,11 +30,6 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(new ResponseDefault(ex.getMessage()), HttpStatus.NOT_FOUND);
 	}
 	
-	@ExceptionHandler(TipoExameNotFoundException.class)
-	public ResponseEntity<ResponseDefault> tipoExameNotFound(TipoExameNotFoundException ex, HttpServletRequest request) {	
-		LOG.error(this.getClass().getSimpleName() + ".tipoExameNotFound(TipoExameNotFoundException ex, HttpServletRequest request) " + ex.getMessage());
-		return new ResponseEntity<>(new ResponseDefault(ex.getMessage()), HttpStatus.NOT_FOUND);
-	}
 
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,

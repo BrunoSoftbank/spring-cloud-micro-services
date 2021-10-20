@@ -13,9 +13,7 @@ public class ExameResponse implements Serializable {
 
 	private static final long serialVersionUID = 393773407512145912L;
 	
-	private Long id;
+	private String id;
 	private String nome;
-	private StatusResponse status;
-	private TipoResponse tipo;
-	
+	private String descricao;	
 }

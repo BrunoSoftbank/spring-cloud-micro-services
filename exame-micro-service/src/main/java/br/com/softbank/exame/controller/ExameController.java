@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -45,7 +44,7 @@ public class ExameController {
 	
 	@GetMapping("/{id}")
 	@ApiOperation(value = "Busca um exame por id")
-	public ResponseEntity<ExameResponse> findById(@RequestHeader String  Authorization, @PathVariable Long id) {
+	public ResponseEntity<ExameResponse> findById(@RequestHeader String  Authorization, @PathVariable String id) {
 		Exame exame = exameService.findById(id);
 		return ResponseEntity.ok(exameConverter.convertExameEntityToExameResponse(exame));
 	}
@@ -59,23 +58,15 @@ public class ExameController {
 	
 	@PutMapping("/{id}")
 	@ApiOperation(value = "Atualização de exames")
-	public ResponseEntity<ExameResponse> update(@RequestHeader String  Authorization, @PathVariable Long id, @Valid @RequestBody ExameRequest request) {
+	public ResponseEntity<ExameResponse> update(@RequestHeader String  Authorization, @PathVariable String id, @Valid @RequestBody ExameRequest request) {
 		Exame exame = exameService.update(id, exameConverter.convertExameRequestToExameEntity(request));
 		return ResponseEntity.ok(exameConverter.convertExameEntityToExameResponse(exame));
 	}
 	
 	@DeleteMapping("/{id}")
 	@ApiOperation(value = "Deleção de exames")
-	public ResponseEntity<Void> deleteById(@RequestHeader String  Authorization, @PathVariable Long id) {
+	public ResponseEntity<Void> deleteById(@RequestHeader String  Authorization, @PathVariable String id) {
 		exameService.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
-
-	@PatchMapping("/{id}")
-	@ApiOperation(value = "Ativar ou Desativar um exame")
-	public ResponseEntity<ExameResponse> patch(@RequestHeader String  Authorization, @PathVariable Long id) {
-		Exame exame = exameService.patch(id);
-		return ResponseEntity.ok(exameConverter.convertExameEntityToExameResponse(exame));
-	}
-	
 }

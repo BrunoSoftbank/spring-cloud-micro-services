@@ -1,27 +1,12 @@
 spring:
   cache:
     type: redis
-  datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    initialization-mode: always
-    password: 123456
-    url: jdbc:mysql://localhost:3306/softbank_exame
-    username: root
-  flyway:
-    baseline-on-migrate: true
-    locations: classpath:db/migration
-    password: 123456
-    schemas: softbank_exame
-    url: jdbc:mysql://localhost:3306
-    user: root  
+  data:
+    mongodb:
+      uri: mongodb://root:123456@127.0.0.1:27017/softbank_exame?authSource=admin
   jpa:
-    database: MYSQL
     hibernate:
-      ddl-auto: none
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-    show-sql: true
+      ddl-auto: auto
   redis:
     host: localhost
     port: 6379
