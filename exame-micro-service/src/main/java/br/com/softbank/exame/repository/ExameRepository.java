@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.softbank.exame.model.Exame;
 
 @Repository
-public interface ExameRepository extends MongoRepository<Exame, Long> {
+public interface ExameRepository extends MongoRepository<Exame, String> {
 
 }

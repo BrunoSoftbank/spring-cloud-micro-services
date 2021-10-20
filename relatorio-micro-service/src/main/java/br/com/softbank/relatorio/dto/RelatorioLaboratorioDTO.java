@@ -36,14 +36,17 @@ public class RelatorioLaboratorioDTO implements Serializable {
 	public Long getId() {
 		return id;
 	}
+	
 	@RelatorioLabel(name = "Nome", order = 2)
 	public String getNome() {
 		return nome;
 	}
+	
 	@RelatorioLabel(name = "Cidade", order = 3)
 	public String getCidade() {
 		return cidade;
 	}
+	
 	@RelatorioLabel(name = "Bairro", order = 4)
 	public String getBairro() {
 		return bairro;
@@ -52,10 +55,12 @@ public class RelatorioLaboratorioDTO implements Serializable {
 	public String getRua() {
 		return rua;
 	}
+	
 	@RelatorioLabel(name = "Numero", order = 6)
 	public String getNumero() {
 		return numero;
 	}
+	
 	@RelatorioLabel(name = "Status", order = 7)
 	public String getStatus() {
 		return status;

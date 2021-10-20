@@ -29,7 +29,7 @@ public class ExameService {
 
 	@Cacheable(cacheNames = "Exame", key = "#id")
 	public Exame findById(String id) {
-		return exameRepository.findById(Long.valueOf(id)).orElseThrow(() ->new ExameNotFoundException(String.format(ErrosDefaultEnum.EXAME_NAO_ENCONTRADO.getDescricao(), id)));	
+		return exameRepository.findById(id).orElseThrow(() ->new ExameNotFoundException(String.format(ErrosDefaultEnum.EXAME_NAO_ENCONTRADO.getDescricao(), id)));	
 	}
 
 	@CacheEvict(cacheNames = "Exame", allEntries = true)

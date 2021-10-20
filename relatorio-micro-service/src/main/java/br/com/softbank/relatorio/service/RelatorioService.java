@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.softbank.relatorio.dto.RelatorioConsultaDTO;
-import br.com.softbank.relatorio.dto.RelatorioExameDTO;
 import br.com.softbank.relatorio.dto.RelatorioLaboratorioDTO;
 import br.com.softbank.relatorio.enuns.ErrosDefaultEnum;
 import br.com.softbank.relatorio.enuns.ResourceEnum;
@@ -64,8 +63,7 @@ public class RelatorioService {
 	private List<?> buscarDados(String Authorization, ResourceEnum resource) {
 		switch (resource) {
 		case exames:
-			return exameService.findAll(Authorization).stream().map(e -> new RelatorioExameDTO(e.getId(), e.getNome(),
-					e.getTipo().getDescricao(), e.getStatus().getDescricao())).collect(Collectors.toList());
+			return exameService.findAll(Authorization);
 		case laboratorios:
 			return laboratorioService.findAll(Authorization).stream()
 					.map(l -> new RelatorioLaboratorioDTO(l.getId(), l.getNome(), l.getEndereco().getCidade(),

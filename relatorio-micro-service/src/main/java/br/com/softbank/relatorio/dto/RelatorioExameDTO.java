@@ -9,36 +9,32 @@ public class RelatorioExameDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
+	private String id;
 	private String nome;
-	private String tipo;
-	private String status;
+	private String descricao;
 	
 	public RelatorioExameDTO() {
 		
 	}	
 	
-	public RelatorioExameDTO(Long id, String nome, String tipo, String status) {
+	public RelatorioExameDTO(String id, String nome, String descricao) {
 		this.id = id;
 		this.nome = nome;
-		this.tipo = tipo;
-		this.status = status;
+		this.descricao = descricao;
 	}
 
 	@RelatorioLabel(name = "Id", order = 1)
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
+	
 	@RelatorioLabel(name = "Nome", order = 2)
 	public String getNome() {
 		return nome;
 	}
-	@RelatorioLabel(name = "Tipo", order = 3)
-	public String getTipo() {
-		return tipo;
-	}
-	@RelatorioLabel(name = "Status", order = 4)
-	public String getStatus() {
-		return status;
+	
+	@RelatorioLabel(name = "Descricao", order = 3)
+	public String getDescricao() {
+		return descricao;
 	}	
 }

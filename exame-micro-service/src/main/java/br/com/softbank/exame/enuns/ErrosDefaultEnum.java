@@ -2,7 +2,7 @@ package br.com.softbank.exame.enuns;
 
 public enum ErrosDefaultEnum {
 
-	EXAME_NAO_ENCONTRADO("Exame de id %d não encontrado");
+	EXAME_NAO_ENCONTRADO("Exame de id %s não encontrado");
 	
 	private String descricao;
 	

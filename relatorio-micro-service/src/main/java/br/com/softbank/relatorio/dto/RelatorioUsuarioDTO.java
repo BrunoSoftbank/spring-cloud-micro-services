@@ -20,18 +20,22 @@ public class RelatorioUsuarioDTO implements Serializable {
 	public Long getId() {
 		return id;
 	}
+	
 	@RelatorioLabel(name = "Nome", order = 2)
 	public String getNome() {
 		return nome;
 	}
+	
 	@RelatorioLabel(name = "Email", order = 3)
 	public String getEmail() {
 		return email;
 	}
+	
 	@RelatorioLabel(name = "Status", order = 5)
 	public Boolean isAtivo() {
 		return ativo;
 	}
+	
 	@RelatorioLabel(name = "Data do Cadastro", order = 4)
 	public LocalDate getDataCadastro() {
 		return dataCadastro;

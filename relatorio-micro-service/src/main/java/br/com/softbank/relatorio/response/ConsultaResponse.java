@@ -2,6 +2,7 @@ package br.com.softbank.relatorio.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import br.com.softbank.relatorio.dto.RelatorioExameDTO;
 import br.com.softbank.relatorio.dto.RelatorioUsuarioDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +17,7 @@ public class ConsultaResponse {
 	@JsonProperty("usuario")
 	private RelatorioUsuarioDTO usuarioDTO;
 	@JsonProperty("exame")
-	private ExameResponse exameDTO;
+	private RelatorioExameDTO exameDTO;
 	@JsonProperty("laboratorio")
 	private LaboratorioResponse laboratorioDTO;
 }
