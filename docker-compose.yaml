@@ -29,14 +29,6 @@ services:
       - network
     restart: unless-stopped
 
-  sqlLite:
-    image: nouchka/sqlite3:latest
-    container_name: sqlLite
-    volumes:
-      - sqlLite:/root/db
-    stdin_open: true
-    tty: true
-
   mongo:
     image: mongo
     container_name: mongo
